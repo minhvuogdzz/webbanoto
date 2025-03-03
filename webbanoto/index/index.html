@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/webbanoto/stylecss/style.css">
+    <link rel="stylesheet" href="/webbanoto/stylecss/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/webbanoto/themify-icons/themify-icons.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="ti-home menu-icon"></i>
+                <a href="index.html">
+                    <img src="/webbanoto/image/LogoWeb.png" alt="Car Rental Logo">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa fa-bars"></i>
+                <input type="text" placeholder="Which car do you want to refer to ?">
+                <i class="fa fa-search"></i>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#"><i class="fa fa-print"></i>
+                    <p>Manage Booking</p>
+                </a>
+                <a href="login.html"><i class="fa fa-user"></i>
+                    <p>Login</p>
+                </a>
+                <a href="#"><i class="fa fa-question-circle"></i>
+                    <p>Help</p>
+                </a>
+            </nav>
+        </div>
+        <div class="sidebar">
+            <div class="filter-title">
+                <i class="fa fa-filter"></i> Filter
+            </div>
+
+            <!-- Price Filter -->
+            <div class="filter-group">
+                <h3>Price of Vehicle <i class="fa fa-chevron-down"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option" onclick="selectOption(this)">200M - 400M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">400M - 600M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">600M - 800M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">800M - 1B <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">> 1B <i class="fa fa-star"></i></div>
+                </div>
+            </div>
+
+            <!-- Type of Vehicle -->
+            <div class="filter-group">
+                <h3>Type of Vehicle <i class="fa fa-chevron-down"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option" onclick="selectOption(this)">Sedan <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <div class="filter-option" onclick="selectOption(this)">Family Car <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <div class="filter-option" onclick="selectOption(this)">Service Car <i
+                            class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Couple <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <div class="filter-option" onclick="selectOption(this)">Electric Car <i class="fa fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Country of Origin -->
+            <div class="filter-group">
+                <h3>Country of Origin <i class="fa fa-chevron-down"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option" onclick="selectOption(this)">Germany <i class="fa fa-flag"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Japan <i class="fa fa-flag"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Korea <i class="fa fa-flag"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Viet Nam <i class="fa fa-flag"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-title">
+                <h1 class="content-title-heading">Choose Your Vehicle</h1>
+            </div>
+            <div class="content-info">
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/innova.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/vf3.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/camry.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/cross.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/vf7.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/vios.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/vf9.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/wigo.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article article-last">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/fortuner.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="socials-list">
+                <a href="https://www.facebook.com/iamHCl0104"><i class="ti-facebook"></i></a>
+                <a href="https://www.instagram.com/iamhcl/?hl=en%27"><i class="ti-instagram"></i></a>
+                <a href=""><i class="ti-youtube"></i></a>
+                <a href="https://github.com/haivip777"><i class="ti-github"></i></a>
+                <a href=""><i class="ti-twitter"></i></a>
+                <a href=""><i class="ti-linkedin"></i></a>
+            </div>
+            <p class="copyright">Powered by <a href="">VHAVD.uet.edu.vn</a></p>
+        </div>
+        <script>
+            function selectOption(element) {
+
+                let parentGroup = element.parentNode;
+                let options = parentGroup.querySelectorAll('.filter-option');
+
+                options.forEach(opt => opt.classList.remove('active'));
+
+                element.classList.add('active');
+            }
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+#first-heading {
+    color: rgb(174, 28, 28);
+    font-size: 20px;
+}
+
+.second-heading{
+    color: rgb(112, 96, 213);
+    font-size: 20px;
+}
+
+h1{
+    color : red;
+}
+
+.heading-class{
+    color: white;
+}
+
+#heading-id{
+    color: burlywood;
+}
+
+li{
+    color: red;
+}
+
+li{
+    color: blue !important;
+}
+
+
+:root {
+    --text-color: rgb(101, 93, 93);
+}
+
+h4 {
+    color: var(--text-color) !important;
+}
+
+h3 {
+    --my-color: green;
+    color: var(--my-color) !important;
+}
