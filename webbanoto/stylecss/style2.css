@@ -103,10 +103,15 @@
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid;
-    color: #5077b4;
+    color: #ffffff;
     font-size: 20px;
     border-color: transparent;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.sign-up .button-2:hover {
+    background-color: #ffffff;
+    color: #000000 ;
 }
 
 .sign-up .button-3 {
@@ -131,6 +136,11 @@
     font-size: 20px;
     color: #000000;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.sign-up .button-3:hover{
+    background-color: #3d3d3d ;
+    color: #ffffff;
 }
 
 .sign-up .input-field {
@@ -397,14 +407,21 @@
     border-radius: 20px;
 }
 
+@keyframes flickerGlow {
+    0% { filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5)); }
+    50% { filter: drop-shadow(0px 0px 20px rgb(168, 0, 0)); }
+    100% { filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5)); }
+}
+
 .sign-up .logoweb {
     position: absolute;
-    width: 164px;
-    height: 164px;
-    top: -10px;
-    left: 21px;
+    width: 170px;
+    height: 160px;
+    top: 0;
+    left: 22px;
     object-fit: cover;
-}
+    animation: flickerGlow 1s infinite alternate;
+  }
 
 .sign-up .input-field-7 {
     height: 119px;
