@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/webbanoto/stylecss/style.css">
+    <link rel="stylesheet" href="/webbanoto/stylecss/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" >
+    <link rel="stylesheet" href="/webbanoto/themify-icons/themify-icons.css">
+    <script src="/webbanoto/javascript/main.js"></script>
+    <title>Anh Huy Auto</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="/webbanoto/image/LogoWeb.png" alt="Car Rental Logo">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa fa-bars"></i>
+                <input type="text" placeholder="Which car do you want to refer to ?">
+                <i class="fa fa-search"></i>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#"><i class="fa fa-print"></i>
+                    <p>Manage Booking</p>
+                </a>
+                <a href="login.html"><i class="fa fa-user"></i>
+                    <p>Login</p>
+                </a>
+                <a href="help.html"><i class="fa fa-question-circle"></i>
+                    <p>Help</p>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Sidebar-Start -->
+        <div class="sidebar">
+            <div class="filter-title">
+                <i class="fa fa-filter"></i> Filter
+            </div>
+    
+            <!-- Bộ lọc theo giá -->
+            <div class="filter-group">
+                <h3 onclick="toggleFilter(this)">Price of Vehicle <i class="fa fa-chevron-up"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option" onclick="selectOption(this)">200M - 400M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">400M - 600M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">600M - 800M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">800M - 1B <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">> 1B <i class="fa fa-star"></i></div>
+                </div>
+            </div>
+    
+            <!-- Bộ lọc theo loại xe -->
+            <div class="filter-group">
+                <h3 onclick="toggleFilter(this)">Type of Vehicle <i class="fa fa-chevron-up"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option" onclick="selectOption(this)">Sedan <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Family Car <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Service Car <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Couple <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Electric Car <i class="fa fa-bolt"></i></div>
+                </div>
+            </div>
+    
+            <!-- Bộ lọc theo xuất xứ -->
+            <div class="filter-group">
+                <h3 onclick="toggleFilter(this)">Country of Origin <i class="fa fa-chevron-up"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option" onclick="selectOption(this)">Germany <i class="fa fa-flag"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Japan <i class="fa fa-flag"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Korea <i class="fa fa-flag"></i></div>
+                    <div class="filter-option" onclick="selectOption(this)">Viet Nam <i class="fa fa-flag"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-title">
+                <h1 class="content-title-heading">Choose Your Vehicle</h1>
+            </div>
+            <div class="content-info">
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/innova.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/wigo.png" alt="ảnh xe">d
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/camry.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/cross.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/velozz.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/vios.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/landcuiser.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/vf3.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+                <div class="article article-last">
+                    <div class="article-car">
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="/webbanoto/image/fortuner.png" alt="ảnh xe">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="socials-list">
+                <a href="https://www.facebook.com/minhvuog.dev/" target="_blank" rel="noopener noreferrer" ><i class="ti-facebook"></i></a>
+                <a href="https://www.instagram.com/_minhvuog.dzai/" target="_blank" rel="noopener noreferrer"><i class="ti-instagram"></i></a>
+                <a href="https://www.youtube.com/@MinhV%C6%B0%C6%A1ngD%C6%B0%C6%A1ng-v8e"  target="_blank" rel="noopener noreferrer"><i class="ti-youtube"></i></a>
+                <a href="https://github.com/minhvuogdzz" target="_blank" rel="noopener noreferrer" ><i class="ti-github"></i></a>
+                <a href=""><i class="ti-twitter" target="_blank" rel="noopener noreferrer" ></i></a>
+                <a href=""><i class="ti-linkedin" target="_blank" rel="noopener noreferrer" ></i></a>
+            </div>
+            <p class="copyright">Developed by <a href="">Founder Minh Vuong Duong & Co-Founder Hai Luu Cong</a></p>
+        </div>
+    </div>
+    
+</body>
+
+</html>

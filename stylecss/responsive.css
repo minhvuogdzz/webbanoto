@@ -1,0 +1,307 @@
+/* 930px <= screen <=1200px */
+@media (min-width: 930px) and (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr 4fr;
+        grid-template-rows: 85px 1fr 200px;
+    }
+
+    .sidebar {
+        width: calc(100% / 5); /* Chiếm 1/5 chiều rộng */
+    }    
+
+    .content .content-info {
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+        grid-template-rows: repeat(4, 330px);
+    }
+
+    /* Khi hiển thị 2 cột 8 hàng, thông tin xe thứ 9 sẽ không hiển thị */
+    .content .content-info .article-last {
+        display: none;
+    }
+}
+
+/* 680px <= screen <=929px */
+@media (min-width: 680px) and (max-width: 929px) {
+    /* bố cục lúc này sẽ thay đổi, sidenbar nằm ngay dưới header */
+    .container {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 85px 320px 1fr 200px;
+        grid-template-areas: 
+            "header "
+            "sidebar"
+            "content"
+            "footer";
+    }
+    
+    /* header */
+    .header .menu-icon {
+        display: none; /*ẩn menu-icon*/
+    }
+
+    .header .search-bar {
+        padding: 8px 16px;
+        margin-right: 10px;
+    }
+
+    .header .nav-links {
+        margin-right: 10px;
+    }
+    .header .nav-links a {
+        margin: 0;
+    }
+
+    .header .nav-links a > p{
+        display: none; /*ẩn text, để lại mỗi icon*/
+    }
+
+    /* sidebar */
+    .sidebar {
+        grid-area: sidebar;
+        position: absolute; /*lúc này thanh sidebar sẽ bị cuộn theo thanh cuộn*/
+        top: 85px;
+        left: 0;
+        width: 100%;
+        height: 320px;
+        z-index: 999;
+        overflow-y: auto;
+        color: #fff;
+        padding: 10px;
+        background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+        border-bottom: 1px solid #fff;
+    }
+
+    .sidebar .filter-group {
+        display: none; 
+    }
+
+    /* content */
+    .content {
+        border-left: none;
+    }
+
+    .content .content-info {
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+        grid-template-rows: repeat(4, 330px);
+    }
+
+    .content .content-info .article-last {
+        display: none; /*ẩn xe cuối cùng*/
+    }
+
+    /* footer */
+    .footer {
+        border-left: none;
+    }
+}
+
+/* 540px <= screen <=679px */
+@media (min-width: 540px) and (max-width: 679px) {
+    .container {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 85px 320px 1fr 200px;
+        grid-template-areas: 
+            "header "
+            "sidebar"
+            "content"
+            "footer";
+    }
+    
+    /* header */
+    .header .menu-icon {
+        display: none;
+    }
+
+    .header .search-bar input {
+        border: none;
+        outline: none;
+        background: none;
+        color: white;
+        padding: 5px;
+        width: 185px; /*giảm kích thước thanh input*/
+    }
+
+    .header .search-bar {
+        padding: 8px 16px;
+        margin-right: 10px;
+    }
+
+    .header .nav-links {
+        margin-right: 10px;
+    }
+    .header .nav-links a {
+        margin: 0;
+    }
+
+    .header .nav-links a > p{
+        display: none; /*ẩn text đi*/
+    }
+
+    /* sidebar */
+    .sidebar {
+        grid-area: sidebar;
+        position: absolute;
+        top: 85px;
+        left: 0;
+        width: 100%;
+        height: 320px;
+        z-index: 999;
+        overflow-y: auto;
+        color: #fff;
+        padding: 10px;
+        background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+        border-bottom: 1px solid #fff;
+    }
+
+    .sidebar .filter-group {
+        display: none;
+    }
+
+    /* content */
+    .content {
+        border-left: none;
+    }
+    .content .content-info {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(9, 330px); /*lúc này content thành 1 cột 9 hàng*/
+    }
+
+    /*footer*/
+    .footer {
+        border-left: none;
+    }
+}
+
+/*screen <=539px */
+@media (max-width: 539px) {
+    .container {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 85px 320px 1fr 200px;
+        grid-template-areas: 
+            "header "
+            "sidebar"
+            "content"
+            "footer";
+    }
+    
+    /* header */
+    .header {
+        height: 85px; /*chiều cao thanh header bị thu nhỏ*/
+    }
+    .header .menu-icon {
+        display: none;
+    }
+    .header .logo img {
+        height: 50px; /*thu nhỏ logo*/
+        display: none; /*ẩn logo*/
+    }
+    .header .search-bar input {
+        border: none;
+        outline: none;
+        background: none;
+        color: white;
+        padding: 2px;
+        width: 120px; /*thu nhỏ thanh input*/
+    }
+
+    .header .search-bar {
+        padding: 10px 16px;
+        margin-right: 20px;
+    }
+
+    .header .nav-links {
+        margin-right: 10px;
+    }
+    .header .nav-links a {
+        margin: 0;
+    }
+
+    .header .nav-links a > p{
+        display: none;
+    }
+
+    /* sidebar */
+    .sidebar {
+        grid-area: sidebar;
+        position: absolute;
+        top: 85px; /*đẩy xuống 50px để không bị chồng lên header*/
+        left: 0;
+        width: 100%;
+        height: 320px;
+        z-index: 999;
+        overflow-y: auto;
+        color: #fff;
+        padding: 10px;
+        background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+        border-bottom: 1px solid #fff;
+    }
+
+    .sidebar .filter-group {
+        display: none;
+    }
+
+    /* content */
+    .content .content-info {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(9, 330px);
+    }
+    
+    .content {
+        border-left: none;
+    }
+
+    .content .content-title .content-title-heading {
+        color: #fff;
+        font-size: 28px;
+        margin-left: 22px;
+        line-height: 50px;
+    }
+     /*footer*/
+    .footer {
+        border-left: none;
+    } 
+}
+
+@media (max-width: 929px) {
+    /* Đưa filter ra ngoài và xếp ngang */
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        background: #222; /* Giữ màu nền */
+        border-bottom: 1px solid #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between; /* Cách đều 3 bộ lọc */
+        align-items: center;
+    }
+
+    /* Điều chỉnh nhóm bộ lọc */
+    .sidebar .filter-group {
+        display: flex !important;
+        flex-direction: column; /* Giữ tiêu đề và lựa chọn theo cột */
+        align-items: center;
+        width: 30%; /* Chia đều 3 phần */
+    }
+
+    /* Tiêu đề bộ lọc */
+    .sidebar .filter-group h3 {
+        text-align: center;
+        cursor: pointer;
+        font-size: 16px;
+        padding-bottom: 5px;
+    }
+
+    /* Các tùy chọn hiển thị theo cột khi mở */
+    .filter-options {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
+
