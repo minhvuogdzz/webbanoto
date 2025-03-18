@@ -9,6 +9,21 @@ body {
     color: white;
 }
 
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Đưa background xuống lớp dưới cùng */
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .header {
     position: relative;
     grid-area: header;
@@ -128,4 +143,21 @@ body {
 
 .contact p {
     margin: 5px 0;
+}
+
+.content-background {
+    position: relative;
+    width: 80%; /* Điều chỉnh chiều rộng */
+    height: min-content;
+    margin: 50px auto; /* Canh giữa */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.075); /* Màu trắng mờ */
+    backdrop-filter: blur(10px); /* Hiệu ứng làm mờ */
+    border-radius: 25px; /* Bo góc */
+    box-shadow: 0 4px 10px rgba(61, 61, 61, 0.1); /* Đổ bóng nhẹ */
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Đảm bảo nội dung hiển thị trên nền */
 }
