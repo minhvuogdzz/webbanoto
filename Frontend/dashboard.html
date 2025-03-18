@@ -1,0 +1,48 @@
+<div class="container">
+    <h1 class="menu-a" >Admin Dashboard</h1>
+    <div class="dashboard">
+        <div class="charts-row">
+            <!-- Biểu đồ doanh thu (LỚN HƠN) -->
+            <div class="chart-container large-chart">
+                <h3 class="text">Sales Revenue (Last 6 Months)</h3>
+                <canvas id="salesChart"></canvas>
+            </div>
+
+            <!-- Biểu đồ dòng xe bán chạy (NHỎ HƠN) -->
+            <div class="chart-container small-chart">
+                <h3 class="text">Top Selling Car Models</h3>
+                <canvas id="topSellingCarsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text {
+        text-align: center;
+        margin-bottom: 10px;
+        color: aliceblue;
+    }
+
+    .charts-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px; /* Giảm khoảng cách với bảng Recent Orders */
+    }
+    .chart-container {
+        padding: 15px;
+        background-color: transparent;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .large-chart {
+        width: 60%; /* Tăng kích thước biểu đồ doanh thu */
+    }
+    .small-chart {
+        width: 35%; /* Giảm kích thước biểu đồ pie */
+    }
+    .table-container {
+        margin-top: -10px; /* Đẩy bảng lên trên một chút */
+    }
+</style>

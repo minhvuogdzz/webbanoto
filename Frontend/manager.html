@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/javascript/manager.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/javascript/dashboard.js"></script>
+    <title>Management</title>
+    <link rel="stylesheet" href="/stylecss/manager.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="/image/LogoWeb.png" alt="Car Rental Logo">
+            </a>
+        </div>
+        <h1 class="tieude" >Welcome to Car Management System</h2>
+    </div>
+    <!-- Sidebar Menu -->
+    <div id="menu">
+        <h2 class="menu-a" >MENU</h2>
+        <button onclick="loadPage('dashboard.html')">Dashboard</button>
+        <button onclick="loadPage('car_management.html')">Car Management</button>
+        <button onclick="loadPage('order.html')">Order</button>
+        <button onclick="loadPage('customer.html')">Customer Management</button>
+        <button onclick="loadPage('review.html')">Review & Comments</button>
+        <button onclick="loadPage('statistics.html')">Statistics & Reports</button>
+        <a href="index.html">
+            <Button>Return Home</Button>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content"></div>
+
+    <script>
+        //dashboard by default
+        loadPage('dashboard.html');
+    </script>
+</body>
+</html>
