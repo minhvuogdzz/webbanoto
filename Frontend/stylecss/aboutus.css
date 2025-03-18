@@ -151,7 +151,7 @@ body {
     height: min-content;
     margin: 50px auto; /* Canh giữa */
     padding: 20px;
-    background: rgba(255, 255, 255, 0.075); /* Màu trắng mờ */
+    background: rgba(255, 255, 255, 0); /* Màu trắng mờ */
     backdrop-filter: blur(10px); /* Hiệu ứng làm mờ */
     border-radius: 25px; /* Bo góc */
     box-shadow: 0 4px 10px rgba(61, 61, 61, 0.1); /* Đổ bóng nhẹ */

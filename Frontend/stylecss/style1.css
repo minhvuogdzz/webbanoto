@@ -347,15 +347,15 @@
   top: 602px;
   left: 348px;
   background-image: url(./img/image.svg);
-  background-size: 100% 100%;
+  background-size: 120% 120%;
 }
 
 .sign-in .pngwing-com {
   position: absolute;
-  width: 41px;
-  height: 40px;
+  width: 62px;
+  height: 42.5px;
   top: 0;
-  left: 0;
+  left: -11.2px;
   object-fit: cover;
 }
 
