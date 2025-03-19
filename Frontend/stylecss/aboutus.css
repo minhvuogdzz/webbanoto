@@ -147,17 +147,40 @@ body {
 
 .content-background {
     position: relative;
-    width: 80%; /* Điều chỉnh chiều rộng */
+    width: 80%; 
     height: min-content;
-    margin: 50px auto; /* Canh giữa */
+    margin: 50px auto; 
     padding: 20px;
-    background: rgba(255, 255, 255, 0); /* Màu trắng mờ */
-    backdrop-filter: blur(10px); /* Hiệu ứng làm mờ */
-    border-radius: 25px; /* Bo góc */
-    box-shadow: 0 4px 10px rgba(61, 61, 61, 0.1); /* Đổ bóng nhẹ */
+    background: rgba(255, 255, 255, 0); 
+    backdrop-filter: blur(10px); 
+    border-radius: 25px; 
+    box-shadow: 0 4px 10px rgba(61, 61, 61, 0.1); 
 }
 
 .content {
     position: relative;
-    z-index: 2; /* Đảm bảo nội dung hiển thị trên nền */
+    z-index: 2; 
+}
+
+.name-sign {
+    position: relative;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.sale-button {
+    position: absolute;
+    width: 250px;
+    height: 30px;
+    background-color: rgba(0, 255, 255, 0);
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 10px;
+    border-color: #fff;
+    color: #fff;
+    font-size: 16px;
+}
+
+.sale-button:hover {
+    background-color: rgba(0, 255, 255, 0.314);
 }
