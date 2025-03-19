@@ -1,4 +1,3 @@
-// Hàm vẽ biểu đồ, tách riêng để có thể gọi lại sau khi load
 function loadDashboardChart() {
     console.log("🔄 Đang khởi tạo biểu đồ...");
 
@@ -9,14 +8,14 @@ function loadDashboardChart() {
             labels: ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"],
             datasets: [{
                 label: "Revenue (Tỷ VND)",
-                data: [8, 8.7, 10, 13, 9, 15],  // Biến động mạnh hơn
-                backgroundColor: "rgba(54, 162, 235, 0.3)",  // Xanh dương nhạt
-                borderColor: "rgb(55, 130, 170)",  // Đỏ cam
-                borderWidth: 3,  // Đường đậm hơn
-                pointBackgroundColor: "rgba(255, 255, 255, 1)",  // Điểm trắng
-                pointBorderColor: "rgba(255, 99, 132, 1)",  // Viền đỏ cam
-                pointRadius: 6,  // Điểm lớn hơn
-                tension: 0.3  // Làm đường có độ cong nhẹ
+                data: [8, 8.7, 10, 13, 9, 15],  
+                backgroundColor: "rgba(54, 162, 235, 0.3)",  
+                borderColor: "rgb(55, 130, 170)",  
+                borderWidth: 3,  
+                pointBackgroundColor: "rgba(255, 255, 255, 1)",  
+                pointBorderColor: "rgba(255, 99, 132, 1)",  
+                pointRadius: 6,  
+                tension: 0.3
             }]
         };
 
@@ -33,7 +32,7 @@ function loadDashboardChart() {
                 scales: {
                     x: {
                         ticks: { color: "white", font: { weight: "bold" } },
-                        grid: { color: "rgba(255, 255, 255, 0.2)" } // Đường lưới nhạt
+                        grid: { color: "rgba(255, 255, 255, 0.2)" } 
                     },
                     y: {
                         beginAtZero: true,
@@ -46,7 +45,7 @@ function loadDashboardChart() {
 
         new Chart(salesCtx, config);
     } else {
-        console.error("❌ Lỗi: Không tìm thấy #salesChart!");
+        console.error("Lỗi: Không tìm thấy #salesChart!");
     }
 
     let carsCtx = document.getElementById("topSellingCarsChart");
@@ -58,12 +57,12 @@ function loadDashboardChart() {
                 label: "Top Selling Car Models",
                 data: [30, 50, 20, 40],
                 backgroundColor: [
-                    "rgba(75, 192, 192, 0.8)",  // Xanh ngọc
-                    "rgba(255, 159, 64, 0.8)",  // Cam
-                    "rgba(153, 102, 255, 0.8)", // Tím
-                    "rgba(255, 99, 132, 0.8)"   // Hồng đỏ
+                    "rgba(75, 192, 192, 0.8)",  
+                    "rgba(255, 159, 64, 0.8)",  
+                    "rgba(153, 102, 255, 0.8)", 
+                    "rgba(255, 99, 132, 0.8)"   
                 ],
-                borderColor: "rgba(255, 255, 255, 1)",  // Viền trắng
+                borderColor: "rgba(255, 255, 255, 1)",  
                 borderWidth: 1
             }]
         };
@@ -83,6 +82,6 @@ function loadDashboardChart() {
 
         new Chart(carsCtx, topSellingCarsConfig);
     } else {
-        console.error("❌ Lỗi: Không tìm thấy #topSellingCarsChart!");
+        console.error("Lỗi: Không tìm thấy #topSellingCarsChart!");
     }
 }
