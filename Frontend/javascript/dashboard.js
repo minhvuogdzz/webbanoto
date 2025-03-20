@@ -52,7 +52,7 @@ function loadDashboardChart() {
     if (carsCtx) {
         console.log("✅ Found #topSellingCarsChart, initializing chart...");
         const topSellingCarsData = {
-            labels: ["SUV", "Sedan", "Electric Car", "Sevice Car"],
+            labels: ["SUV", "Sedan", "Pickup Truck", "Sevice Car"],
             datasets: [{
                 label: "Top Selling Car Models",
                 data: [30, 50, 20, 40],

@@ -2,13 +2,14 @@
     <h1 class="menu-a" >Admin Dashboard</h1>
     <div class="dashboard">
         <div class="charts-row">
-            <!-- Biểu đồ doanh thu (LỚN HƠN) -->
+
+            <!-- Biểu đồ doanh thu trong 6 tháng-->
             <div class="chart-container large-chart">
                 <h3 class="text">Sales Revenue (Last 6 Months)</h3>
                 <canvas id="salesChart"></canvas>
             </div>
 
-            <!-- Biểu đồ dòng xe bán chạy (NHỎ HƠN) -->
+            <!--Biểu đồ thống kê xe bán ra-->
             <div class="chart-container small-chart">
                 <h3 class="text">Top Selling Car Models</h3>
                 <canvas id="topSellingCarsChart"></canvas>
@@ -28,7 +29,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 20px; /* Giảm khoảng cách với bảng Recent Orders */
+        margin-bottom: 20px; 
     }
     .chart-container {
         padding: 15px;
@@ -37,12 +38,12 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     .large-chart {
-        width: 60%; /* Tăng kích thước biểu đồ doanh thu */
+        width: 60%; 
     }
     .small-chart {
-        width: 35%; /* Giảm kích thước biểu đồ pie */
+        width: 35%; 
     }
     .table-container {
-        margin-top: -10px; /* Đẩy bảng lên trên một chút */
+        margin-top: -10px; 
     }
 </style>

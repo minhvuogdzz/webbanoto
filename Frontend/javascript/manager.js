@@ -4,7 +4,7 @@ function loadPage(page) {
         .then(data => {
             document.getElementById('content').innerHTML = data;
 
-            // Kiểm tra nếu là dashboard thì khởi tạo biểu đồ
+            //Kiem tra neu la dashboard thi load chart
             if (page === "dashboard.html") {
                 loadDashboardChart();
             }
