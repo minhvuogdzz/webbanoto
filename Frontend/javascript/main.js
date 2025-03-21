@@ -26,3 +26,4 @@ function toggleFilter(header) {
     }
 }
 
+alert('Bạn đang truy cập vào trang web bán ô tô Anh Huy Auto. Hãy chấp nhận truy cập nếu bạn tin tưởng chúng tôi'); // Hiển thị thông báo "Hello, world!" khi chạy file main.js

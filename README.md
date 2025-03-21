@@ -24,7 +24,7 @@ Với đội ngũ tư vấn tận tâm, Anh Huy Auto cam kết hỗ trợ 24/7, 
 💻 Đội ngũ phát triển
 🛠️ Design web: Dương Minh Vương - Nguyễn Hữu Trọng Anh
 🚀 Front-end: Dương Minh Vương - Lưu Công Hải 
-⚙️ Back-end: Nguyễn Hữu Trọng Anh - Nguyễn Đức Việt - Nguyễn Đức Dũng
+⚙️ Back-end: Nguyễn Hữu Trọng Anh - Nguyễn Đức Việt - Nguyễn Đức Dũng 
 
 🛠📞 Liên hệ hỗ trợ kỹ thuật
 Mọi chi tiết, sự cố hoặc vấn đề liên quan đến trang web, vui lòng liên hệ: anhhuyauto888@gmail.com
