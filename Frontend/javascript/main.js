@@ -26,4 +26,28 @@ function toggleFilter(header) {
     }
 }
 
-alert('Bạn đang truy cập vào trang web bán ô tô Anh Huy Auto. Hãy chấp nhận truy cập nếu bạn tin tưởng chúng tôi'); // Hiển thị thông báo "Hello, world!" khi chạy file main.js
+function updateNavbar() {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+    const loginBtn = document.getElementById("login-btn");
+
+    if (email && token) {
+        loginBtn.innerHTML = `<i class="fa fa-user"></i> <p>${email}</p>`;
+        loginBtn.href = "#"; // Không cho chuyển trang
+        loginBtn.onclick = logoutUser; // Gán sự kiện đăng xuất
+    } else {
+        loginBtn.innerHTML = `<i class="fa fa-user"></i> <p>Login</p>`;
+        loginBtn.href = "login.html"; // Chuyển về trang đăng nhập
+        loginBtn.onclick = null; // Xóa sự kiện đăng xuất
+    }
+}
+
+function logoutUser() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    alert("Bạn đã đăng xuất!");
+    updateNavbar(); // Cập nhật lại navbar
+}
+// Gọi updateNavbar() ngay khi trang load
+document.addEventListener("DOMContentLoaded", updateNavbar);
+

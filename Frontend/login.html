@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/stylecss/style1.css" />
   <title>Login</title>
   <link rel="icon" href="/image/LogoWeb.png">
+  <script src="/javascript/login.js" defer ></script>
 </head>
 
 <body>
@@ -18,25 +19,31 @@
           <img class="element" src="/image/back.png" />
           <div class="frame">
             <div class="hello-welcome-back">Hello !<br />Welcome Back</div>
-            <div class="input-field">
-              <label class="input">
-                <input type="text" class="input-box" placeholder="Email or User">
-              </label>
-            </div>
-            <div class="div">
-              <div class="input-field-2">
-                <label class="input2">
-                  <input type="password" class="input2-box" placeholder="Password">
+
+            <!-- Bọc toàn bộ input + button đăng nhập vào form -->
+            <form id="loginForm">
+              <div class="input-field">
+                <label class="input">
+                  <input type="text" id="emailOrUser" class="input-box" placeholder="Email or User">
                 </label>
               </div>
-              <button class="button">Forget password?</button>
-            </div>
-            <a href="index.html">
-              <button class="button-3">Sign In</button>
-            </a>
+              <div class="div">
+                <div class="input-field-2">
+                  <label class="input2">
+                    <input type="password" id="password" class="input2-box" placeholder="Password">
+                  </label>
+                </div>
+                <button type="button" class="button">Forget password?</button>
+              </div>
+
+              <!-- Đặt type="submit" để form tự động submit khi nhấn Enter -->
+              <button type="submit" class="button-3">Sign In</button>
+            </form>
+
             <a href="signup.html">
               <button class="button-5">Register</button>
             </a>
+
             <div class="text-wrapper-2">or</div>
             <div class="pngegg-wrapper">
               <img class="pngegg" src="/image/logofb.png" />
@@ -55,6 +62,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
