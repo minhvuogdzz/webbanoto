@@ -12,10 +12,10 @@ let db;
 connectDB()
     .then((database) => {
         db = database;
-        console.log("✅ Kết nối Database thành công!");
+        console.log("Kết nối Database thành công!");
     })
     .catch((err) => {
-        console.error("❌ Lỗi kết nối Database:", err);
+        console.error("Lỗi kết nối Database:", err);
     });
 
 //Đăng ký tài khoản
@@ -45,7 +45,7 @@ router.post("/register", async (req, res) => {
         };
 
         await db.collection("users").insertOne(newUser);
-        console.log("✅ Đăng ký thành công cho email:", normalizedEmail);
+        console.log("Đăng ký thành công cho email:", normalizedEmail);
 
         res.json({ message: "Đăng ký thành công!" });
     } catch (error) {
@@ -59,20 +59,20 @@ router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        console.log("📩 Email nhận được:", email);
-        console.log("🔑 Mật khẩu nhận được:", password);
+        console.log(" Email nhận được:", email);
+        console.log(" Mật khẩu nhận được:", password);
 
         if (!db) return res.status(500).json({ message: "Lỗi server, thử lại sau!" });
 
         const normalizedEmail = email.toLowerCase().trim();
-        console.log("📩 Email chuẩn hóa:", normalizedEmail);
+        console.log("Email chuẩn hóa:", normalizedEmail);
 
         // Kiểm tra user có tồn tại không
         const user = await db.collection("users").findOne({ email: normalizedEmail });
-        console.log("🧑‍💻 User tìm thấy:", user);
+        console.log("*User tìm thấy:", user);
 
         if (!user) {
-            console.log("❌ User không tồn tại:", normalizedEmail);
+            console.log("!*User không tồn tại:", normalizedEmail);
             return res.status(400).json({ message: "Email hoặc mật khẩu không đúng!" });
         }
 
@@ -82,10 +82,10 @@ router.post("/login", async (req, res) => {
         console.log("Mật khẩu trong DB:", user.password);
         console.log("Kết quả so sánh:", isMatch);
 
-        console.log("🔐 Kết quả kiểm tra mật khẩu:", isMatch);
+        console.log("*Kết quả kiểm tra mật khẩu:", isMatch);
 
         if (!isMatch) {
-            console.log("❌ Mật khẩu không đúng cho user:", normalizedEmail);
+            console.log("*Mật khẩu không đúng cho user:", normalizedEmail);
             return res.status(400).json({ message: "Email hoặc mật khẩu không đúng!" });
         }
 
@@ -93,7 +93,7 @@ router.post("/login", async (req, res) => {
         console.log("🔑 Giá trị JWT_SECRET:", process.env.JWT_SECRET);
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        console.log("✅ Tạo token thành công:", token);
+        console.log("=>Tạo token thành công:", token);
 
         res.json({ message: "Đăng nhập thành công!", token, email: user.email }); // Include email
     } catch (error) {

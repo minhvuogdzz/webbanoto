@@ -8,10 +8,10 @@ async function connectDB() {
   //Xử lý ngoại lệ kết nối database
   try {
     await client.connect();
-    console.log("✅ Kết nối MongoDB thành công!");
+    console.log("=> Kết nối MongoDB thành công!");
     return client.db("mydatabase"); // Chọn database "mydatabase"
   } catch (err) {
-    console.error("❌ Lỗi kết nối MongoDB:", err);
+    console.error("!*Lỗi kết nối MongoDB:", err);
   }
 }
 

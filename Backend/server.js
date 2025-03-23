@@ -29,5 +29,5 @@ app.get("*", (req, res, next) => {
 
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server đang chạy tại: http://localhost:${PORT}`);
+    console.log(`Server đang chạy tại: http://localhost:${PORT}`);
 });
