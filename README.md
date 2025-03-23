@@ -8,6 +8,7 @@ Anh Huy Auto được xây dựng dựa trên nền tảng công nghệ vững c
 ✅ HTML, CSS: Tạo nên giao diện trực quan, thân thiện, tối ưu hiển thị trên mọi thiết bị.
 ✅ JavaScript: Đảm bảo các tương tác mượt mà, giúp người dùng dễ dàng tìm kiếm và đặt mua xe.
 ✅ NodeJS, Express NodeJS: Xử lý logic nghiệp vụ mạnh mẽ, bảo mật cao, giúp quản lý dữ liệu xe và giao dịch an toàn.
+✅ Mongo Database: Quản lý dữ liệu khách hàng nhanh chóng, tính bảo mật tuyệt đối
 
 🚗 Kho xe đa dạng – Tìm xe nhanh chóng
 Với hệ thống lọc thông minh, khách hàng có thể tìm kiếm xe theo:
