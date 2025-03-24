@@ -90,7 +90,7 @@ router.post("/login", async (req, res) => {
         }
 
         // Tạo token
-        console.log("🔑 Giá trị JWT_SECRET:", process.env.JWT_SECRET);
+        console.log(" *Giá trị JWT_SECRET:", process.env.JWT_SECRET);
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
         console.log("=>Tạo token thành công:", token);

@@ -46,8 +46,16 @@ function logoutUser() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     alert("Bạn đã đăng xuất!");
-    updateNavbar(); // Cập nhật lại navbar
+    updateNavbar(); 
 }
 // Gọi updateNavbar() ngay khi trang load
 document.addEventListener("DOMContentLoaded", updateNavbar);
 
+function loadPage(url) {
+    let link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click(); 
+    document.body.removeChild(link);
+}

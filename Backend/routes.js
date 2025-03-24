@@ -4,11 +4,6 @@ const connectDB = require("./database");
 const router = express.Router();
 let db;
 
-// Kết nối database
-connectDB().then((database) => {
-    db = database;
-});
-
 // 📌 Lấy danh sách users
 router.get("/users", async (req, res) => {
     const users = await db.collection("users").find().toArray();

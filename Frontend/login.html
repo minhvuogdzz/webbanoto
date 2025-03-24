@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="/stylecss/style1.css" />
   <title>Login</title>
   <link rel="icon" href="/image/LogoWeb.png">
+  <script src="https://accounts.google.com/gsi/client" async defer data-client_id="1013513995188-gjqtc0alja2057keaoa9u0lk626a143r.apps.googleusercontent.com"></script>
   <script src="/javascript/login.js" defer ></script>
+  
 </head>
 
 <body>
@@ -35,8 +37,6 @@
                 </div>
                 <button type="button" class="button">Forget password?</button>
               </div>
-
-              <!-- Đặt type="submit" để form tự động submit khi nhấn Enter -->
               <button type="submit" class="button-3">Sign In</button>
             </form>
 
@@ -51,8 +51,12 @@
             </div>
             <div class="pngwing-com-wrapper">
               <img class="pngwing-com" src="/image/google.png" />
-              <button class="button-6">Google</button>
-            </div>
+              <button class="button-6" id="google-login">Google</button>
+          </div>
+          <div id="user-info" style="display: none;">
+            <img id="user-avatar" src="" alt="Avatar" width="50" />
+            <span id="user-name"></span>
+          </div>        
             <div class="text-wrapper-3">connect with</div>
           </div>
         </div>

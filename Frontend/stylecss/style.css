@@ -377,3 +377,27 @@ body{
     color: #fff;
     text-decoration: none;
 }
+
+.chatbot {
+    position: absolute;
+    top: 1220px;
+    left: 1320px;
+    z-index: 0;
+}
+
+.chat-button {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    background-color: #3498db2a;
+    color: #fff;
+    border-color: #ffffff;
+
+}
+
+.chat-button:hover {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #ffffff;
+}
