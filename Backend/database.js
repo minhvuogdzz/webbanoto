@@ -2,7 +2,7 @@ const { MongoClient } = require("mongodb");
 
 const uri = "mongodb://localhost:27017"; // Địa chỉ MongoDB cục bộ
 const client = new MongoClient(uri);
-const dbName = "Anh Huy Auto";
+const dbName = "AnhHuyAuto";
 let dbInstance = null;
 
 async function connectDB() {
