@@ -40,28 +40,27 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Lỗi kết nối:", error);
         }
     });
+
+    // Google login
+    document.getElementById("google-login").addEventListener("click", function () {
+        window.location.href = "http://localhost:4000/auth/google";
+    });
 });
 
-//jwt
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
 
     const data = JSON.parse(atob(response.credential.split('.')[1]));
     console.log("User Info:", data);
-s
-    document.getElementById("user-avatar").src = data.picture;
-    document.getElementById("user-name").innerText = "Xin chào, " + data.name;
-    document.getElementById("user-info").style.display = "block";
+
+    localStorage.setItem("token", response.credential);
+    localStorage.setItem("email", data.email);
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("avatar", data.picture);
+
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 500);
 }
 
-window.onload = function () {
-    google.accounts.id.initialize({
-        client_id: "1013513995188-gjqtc0alja2057keaoa9u0lk626a143r.apps.googleusercontent.com",
-        callback: handleCredentialResponse
-    });
-
-    document.getElementById("google-login").addEventListener("click", function () {
-        google.accounts.id.prompt(); 
-    });
-};
 

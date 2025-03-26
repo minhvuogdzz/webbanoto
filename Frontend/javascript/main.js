@@ -27,12 +27,26 @@ function toggleFilter(header) {
 }
 
 function updateNavbar() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userInfo = urlParams.get('userInfo');
+
+    if (userInfo) {
+        const user = JSON.parse(decodeURIComponent(userInfo));
+        localStorage.setItem("token", user.token);
+        localStorage.setItem("email", user.email);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem("avatar", user.avatar);
+        window.history.replaceState({}, document.title, "/index.html"); // Remove query params from URL
+    }
+
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
+    const name = localStorage.getItem("name");
+    const avatar = localStorage.getItem("avatar");
     const loginBtn = document.getElementById("login-btn");
 
     if (email && token) {
-        loginBtn.innerHTML = `<i class="fa fa-user"></i> <p>${email}</p>`;
+        loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
         loginBtn.href = "#"; // Không cho chuyển trang
         loginBtn.onclick = logoutUser; // Gán sự kiện đăng xuất
     } else {
@@ -45,6 +59,8 @@ function updateNavbar() {
 function logoutUser() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("avatar");
     alert("Bạn đã đăng xuất!");
     updateNavbar(); 
 }

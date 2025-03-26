@@ -3,20 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 const connectDB = require("./database");
 
 const router = express.Router();
 let db;
-
-// Kết nối database
-connectDB()
-    .then((database) => {
-        db = database;
-        console.log("Kết nối Database thành công!");
-    })
-    .catch((err) => {
-        console.error("Lỗi kết nối Database:", err);
-    });
 
 //Đăng ký tài khoản
 router.post("/register", async (req, res) => {
@@ -49,6 +40,11 @@ router.post("/register", async (req, res) => {
 
         res.json({ message: "Đăng ký thành công!" });
     } catch (error) {
+        if (error.code === 11000) {
+            // Duplicate key error
+            console.error("Lỗi đăng ký: Email đã tồn tại!");
+            return res.status(400).json({ message: "Email đã tồn tại!" });
+        }
         console.error("Lỗi đăng ký:", error);
         res.status(500).json({ message: "Lỗi server!" });
     }
@@ -118,6 +114,37 @@ router.get("/profile", async (req, res) => {
         console.error("Lỗi lấy profile:", error);
         res.status(500).json({ message: "Lỗi server!" });
     }
+});
+
+// Google OAuth routes
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/login.html" }), async (req, res) => {
+    try {
+        if (!db) {
+            db = await connectDB();
+        }
+        console.log("Google OAuth callback - Database connected:", !!db);
+
+        const user = req.user;
+        const userInfo = {
+            token: req.session.passport.user,
+            email: user.email,
+            name: user.name,
+            avatar: user.avatar
+        };
+
+        const userInfoString = encodeURIComponent(JSON.stringify(userInfo));
+        res.redirect(`/index.html?userInfo=${userInfoString}`);
+    } catch (error) {
+        console.error("Google OAuth callback error:", error);
+        res.status(500).json({ message: "Lỗi server!" });
+    }
+});
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/index.html");
 });
 
 module.exports = router;

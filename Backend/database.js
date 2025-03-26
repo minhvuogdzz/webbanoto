@@ -1,8 +1,6 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
-const uri = "mongodb://localhost:27017"; // Địa chỉ MongoDB cục bộ
-const client = new MongoClient(uri);
-const dbName = "AnhHuyAuto";
+const uri = process.env.MONGO_URI || "mongodb://localhost:27017/AnhHuyAuto"; // Địa chỉ MongoDB cục bộ
 let dbInstance = null;
 
 async function connectDB() {
@@ -11,12 +9,12 @@ async function connectDB() {
     }
 
     try {
-        await client.connect();
-        console.log("=> Kết nối MongoDB thành công!");
-        dbInstance = client.db(dbName); // Chọn database "mydatabase"
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        dbInstance = mongoose.connection;
         return dbInstance;
     } catch (err) {
         console.error("!*Lỗi kết nối MongoDB:", err);
+        throw err; // Re-throw the error after logging it
     }
 }
 

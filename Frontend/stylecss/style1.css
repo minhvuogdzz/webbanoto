@@ -345,9 +345,10 @@
   width: 116px;
   height: 41px;
   top: 602px;
-  left: 348px;
+  left: 244px;
   background-image: url(./img/image.svg);
   background-size: 120% 120%;
+  cursor: pointer; 
 }
 
 .sign-in .pngwing-com {
@@ -397,4 +398,10 @@
   left: 22px;
   object-fit: cover;
   animation: flickerGlow 1s infinite alternate;
+}
+
+.logo-home {
+  position: relative;
+  top: -1020px;
+  left: 50px;
 }

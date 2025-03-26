@@ -4,7 +4,9 @@
   "description": "Giới thiệu về Anh Huy Auto – Trang web bán ô tô đẳng cấp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
