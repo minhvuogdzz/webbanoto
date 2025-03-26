@@ -1,0 +1,51 @@
+<div class="container py-4">
+  <h2 class="content-title text-center">Quản lý Ô tô</h2>
+
+  <div class="mb-3 d-flex gap-2">
+      <input type="text" id="name" class="form-control w-25" placeholder="Tên xe">
+      <input type="email" id="email" class="form-control w-25" placeholder="Hãng">
+      <input type="text" id="phone" class="form-control w-25" placeholder="Số khung">
+      <select id="status" class="form-control w-25">
+          <option value="Hoạt động">Xăng</option>
+          <option value="Ngừng hoạt động">Điện</option>
+      </select>
+      <button class="btn btn-primary ms-auto">Thêm xe</button>
+  </div>
+
+  <table class="table table-bordered table-striped mt-4">
+      <thead class="table-light">
+          <tr>
+              <th>STT</th>
+              <th>Tên</th>
+              <th>Hãng</th>
+              <th>Số khung</th>
+              <th>Nhiên liệu</th>
+              <th>Hành động</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>1</td>
+              <td>Honda</td>
+              <td>Toyota</td>
+              <td>123</td>
+              <td>Xăng</td>
+              <td>
+                  <button class="btn btn-warning">Sửa</button>
+                  <button class="btn btn-danger">Xóa</button>
+              </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>VF3</td>
+            <td>Vinsfast</td>
+            <td>123</td>
+            <td>Điện</td>
+            <td>
+                <button class="btn btn-warning">Sửa</button>
+                <button class="btn btn-danger">Xóa</button>
+            </td>
+        </tr>
+     </tbody>
+  </table>
+</div>

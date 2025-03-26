@@ -1,29 +1,38 @@
-
-body {
-    height: 100%;
-    display: flex;
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    }
+    box-sizing: border-box;
+}
 
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container-main {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 85px 1fr;
+    grid-template-areas:
+        "header header"
+        "menu content";
+}
+
+/* Header */
 .header {
     grid-area: header;
-    position: fixed;
-    /* Đặt vị trí cố định */
-    top: 0;
-    /* Căn trên cùng */
-    left: 0;
-    /* Căn trái */
+    position: fixed;     /* Đặt vị trí cố định */
+    top: 0;    /* Căn trên cùng */
+    left: 0;    /* Căn trái */
     width: 100%;
-    height: 50px;
+    height: 85px;
     background: linear-gradient(to right, #1a1a1a, #202020, #393939);
     z-index: 999;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
     color: white;
+    padding: 10px 20px;
     border-bottom: 1px solid #fff;
 }
 
@@ -41,9 +50,8 @@ body {
     }
 }
 
-.header .logo img {
-    width: 150px;
-    height: auto;
+.logo img {
+    height: 100px;
     animation: flickerGlow 1s infinite alternate;
 }
 
@@ -55,43 +63,65 @@ body {
     left: 600px;
 }
 
-#menu {
-    width: 20%;
-    height: 120vh;
+/* Menu */
+.menu {
+    grid-area: menu;
+    position: fixed;
     background: linear-gradient(to right, #0a0a0a, #2a2a2a, #555);
     color: white;
-    padding: 100px 20px 20px; /* Chừa khoảng trống đủ lớn để tránh header che nội dung */
     left: 0;
-    top: 0;
-    }
-    
-.menu-a {
-    color: aliceblue;
-}   
-        
-#menu button {
+    top: 85px;
+    width: calc(100% / 6);
+    height: calc(100vh - 85px);
+    z-index: 999;
+    overflow-y: auto;
+}  
+  
+.menu .list-menu {
     display: flex;
-    justify-content: center; 
-    align-items: center;    
-    width: 100%;
-    margin: 10px 10px 20px 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu .list-menu .menu-title {
+    margin-top: 20px;
+    color: aliceblue;
+} 
+
+.menu .list-menu .btn-menu {
+    width: 80%; 
+    margin: 10px 0;
     padding: 14px;
     background: #333;
     border: none;
     color: white;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     border-radius: 10px;
     font-size: 20px;
 }
+
         
-#menu button:hover {
+.menu .list-menu .btn-menu:hover {
     background: #555;
 }
-        
-#content {
-    flex: 1;
-    padding: 100px 20px 20px; /* Chừa khoảng trống đủ lớn để tránh header che nội dung */
+
+/* Content */
+.content {
+    grid-area: content;
+    /* flex: 1; */
+    /* padding: 100px 20px 20px; */
     background: linear-gradient(to right, #1c1b1b, #353231);
+    /* width: calc(100vw - 18%); */
+    /* height: 100vh; */
+    /* left: 18%; */
+    /* position: fixed; */
+    /* top: 85px; */
+    border-left: 1px solid #fff;
+}
+
+.content .content-title {
+    color: aliceblue;
+    margin: 20px;
 }
 
