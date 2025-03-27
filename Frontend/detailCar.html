@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./stylecss/style.css"> -->
+    <link rel="stylesheet" href="./stylecss/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" >
+    <link rel="stylesheet" href="./themify-icons/themify-icons.css">
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/login.js"></script>
+    <title>Anh Huy Auto</title>
+    <link rel="icon" href="./image/LogoWeb.png">
+    <style>
+        html {
+            background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        .container-main {
+            /* height: 100vh;
+            display: grid;
+            grid-template-rows: 85px 1fr;
+            grid-template-areas:
+                "header "
+                "container"; */
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            /* Đặt vị trí cố định */
+            top: 0;
+            /* Căn trên cùng */
+            left: 0;
+            /* Căn trái */
+            width: 100%;
+            /* Chiếm toàn bộ chiều rộng */
+            height: 85px;
+            /* Chiều cao của header */
+            background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+            /* Màu nền của header */
+            z-index: 999;
+            /* Đảm bảo header nằm trên các phần tử khác */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: white;
+            border-bottom: 1px solid #fff;
+        }
+
+        @keyframes flickerGlow {
+            0% {
+                filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+            }
+
+            50% {
+                filter: drop-shadow(0px 0px 20px rgb(168, 0, 0));
+            }
+
+            100% {
+                filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+            }
+        }
+
+        .logo img {
+            height: 100px;
+            animation: flickerGlow 1s infinite alternate;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 20px;
+            padding: 8px 30px;
+        }
+
+        .search-bar input {
+            border: #a8a3a3;
+            outline: none;
+            background: none;
+            color: white;
+            padding: 5px;
+            width: 300px;
+        }
+
+        .search-bar input::placeholder {
+            color: #aaa;
+        }
+
+        .search-bar i {
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 18px;
+            transition: text-shadow 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #560000;
+            text-shadow: 0px 0px 3px #ffffff, 0px 0px 5px #ffffff; /* Tạo viền xanh */
+        }
+        /* Container */
+        body {
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 150px 0;
+        }
+        .image-box {
+            position: relative;
+            padding: 10px;
+        }
+        .image-box img {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+        }
+        .image-box .dem {
+            z-index: -1;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 93%;
+            padding-top: 78%;
+            max-width: 500px;
+            display: block;
+            background-color: red;
+        }
+        .content {
+            padding-left: 50px;
+        }
+        .content h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .content p {
+            margin-top: 40px;
+            color: #bdc3c7;
+        }
+        .links {
+            margin-top: 40px;
+            display: flex;
+        }
+        .links a {
+            font-size: 15px;
+            text-decoration: none;
+            color: #e74c3c;
+            margin-right: 15px;
+        }
+        .info {
+            flex-wrap: wrap;
+            max-width: 500px;
+        }
+        .info .info-group-one, .info-group-two {
+            display: flex;
+            margin-top: 42px;
+        }
+        .info .info-group-one>div, .info-group-two>div {
+            /* margin-right: 30px; */
+            text-align: center;
+        }
+        .info div span {
+            display: block;
+            margin-bottom: 32px;
+        }
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+        /* End: container */
+
+        /* Start: img-library */
+        .img-library {
+            padding: 40px 0;
+            background-color: #fff;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .gallery-container {
+            position: relative;
+            max-width: 1024px;
+            margin: auto;
+        }
+        .main-image {
+            width: 100%;
+            border-radius: 10px;
+            /* transition: opacity 0.5s ease-in-out;
+            opacity: 1; */
+            position: relative;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        .slide-right {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        /* .fade-out {
+            opacity: 0;
+        } */
+
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .thumbnails img {
+            width: 100px;
+            height: 60px;
+            margin: 5px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+        .thumbnails img.active {
+            opacity: 1;
+            border: 2px solid white;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        .arrow-left { left: 10px; }
+        .arrow-right { right: 10px; }
+        
+        /* footer */
+        .footer {
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+        }
+
+        .footer .socials-list {
+            font-size: 24px;
+        }
+
+        .footer .socials-list a {
+            color: #fff;
+            text-decoration-line: none;
+        }
+
+        .footer .socials-list a:hover {
+            color: #3498db;
+        }
+
+        @keyframes flickerText {
+            0% {
+                color: #fff;
+                text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+            }
+
+            50% {
+                color: #c21414;
+                text-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+            }
+
+            100% {
+                color: #fff;
+                text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .footer .copyright {
+            font-size: 15px;
+            margin-top: 15px;
+            color: #fff;
+        }
+
+        .footer .copyright a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <div class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./image/LogoWeb.png" alt="Car Rental Logo">
+                </a>
+            </div>
+    
+            <div class="search-bar">
+                <i class="fa fa-bars"></i>
+                <input type="text" placeholder="Which car do you want to refer to ?">
+                <i class="fa fa-search"></i>
+            </div>
+    
+            <nav class="nav-links">
+                <a href="manager.html"><i class="fa fa-print"></i>
+                    <p>Admin Manager</p>
+                </a>
+                <a id="login-btn" href="login.html">
+                    <i class="fa fa-user"></i> <span id="login-text">Login</span>
+                </a>
+                <a href="aboutus.html"><i class="fa fa-question-circle"></i>
+                    <p>About US</p>
+                </a>
+            </nav>
+            
+        </div>
+        <div class="container">
+            <div class="image-box">
+                <img src="./image/011DEA3A01BBE6EFEEB74DCB69E50997.png" alt="Toyota Vios 1.5G-CVT">
+                <div class="dem"></div>
+            </div>
+            <div class="content">
+                <h1>VIOS 1.5G-CVT</h1>
+                <p>Bứt phá an toàn Mở ngàn trải nghiệm</p>
+                <div class="links" >
+                    <div style="border-right: 1px solid #fff;">
+                        <a href="#" >XEM THÔNG SỐ</a>
+                    </div>
+                    <div style="margin-left: 15px">
+                        <a href="#" >SO SÁNH XE</a>
+                    </div>                
+                </div>
+                <div class="info">
+                    <div class="info-group-one">
+                        <div style="padding: 0 36px 0 0; border-right: 1px solid #fff;"><span>Số chỗ ngồi</span><p style="font-size: 25px; ">5 chỗ</p></div>
+                        <div style="padding: 0 36px 0 76px; border-right: 1px solid #fff;"><span>Kiểu dáng</span><p style="font-size: 25px;">Sedan</p></div>
+                        <div style="padding: 0 0 0 76px;"><span>Nhiên liệu</span><p style="font-size: 25px;">Xăng</p></div>
+                    </div>
+                    <div class="info-group-two">
+                        <div style="padding: 0 56px 0 36px; border-right: 1px solid #fff;"><span>Xuất xứ</span><p style="font-size: 25px;">Việt Nam</p></div>
+                        <div style="padding: 0 0 0 100px;"><span>Giá từ</span><p style="font-size: 25px;">545.000.000 VNĐ</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="img-library">
+            <h1 style="margin-bottom: 40px; color: #000; font-size: 36px;">THƯ VIỆN ẢNH</h1>
+            <div class="gallery-container">
+                <button class="arrow arrow-left" onclick="changeImage(-1)">&#10094;</button>
+                <img id="mainImage" class="main-image" src="./image/img_library/img_library_vios/anh1.png" alt="">
+                <button class="arrow arrow-right" onclick="changeImage(1)">&#10095;</button>
+            </div>
+            <div class="thumbnails">
+                <img class="thumbnail active" src="./image/img_library/img_library_vios/anh1.png" onclick="selectImage(0)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh2.png" onclick="selectImage(1)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh3.png" onclick="selectImage(2)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh4.png" onclick="selectImage(3)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh5.png" onclick="selectImage(4)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh6.png" onclick="selectImage(5)">
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socials-list">
+                <a href="https://www.facebook.com/minhvuog.dev/" target="_blank" rel="noopener noreferrer" ><i class="ti-facebook"></i></a>
+                <a href="https://www.instagram.com/_minhvuog.dzai/" target="_blank" rel="noopener noreferrer"><i class="ti-instagram"></i></a>
+                <a href="https://www.youtube.com/@MinhV%C6%B0%C6%A1ngD%C6%B0%C6%A1ng-v8e"  target="_blank" rel="noopener noreferrer"><i class="ti-youtube"></i></a>
+                <a href="https://github.com/minhvuogdzz" target="_blank" rel="noopener noreferrer" ><i class="ti-github"></i></a>
+                <a href=""><i class="ti-twitter" target="_blank" rel="noopener noreferrer" ></i></a>
+                <a href=""><i class="ti-linkedin" target="_blank" rel="noopener noreferrer" ></i></a>
+            </div>
+            <p class="copyright">Developed by <a href="">Founder Minh Vuong Duong & Co-Founder Hai Luu Cong</a></p>
+        </div>
+    </div>
+    <!-- JS cho phần thư viện ảnh -->
+    <script>
+        const images = ["./image/img_library/img_library_vios/anh1.png", "./image/img_library/img_library_vios/anh2.png", "./image/img_library/img_library_vios/anh3.png", "./image/img_library/img_library_vios/anh4.png", "./image/img_library/img_library_vios/anh5.png", "./image/img_library/img_library_vios/anh6.png"];
+        let currentIndex = 0;
+        let prevIndex = 0; // Lưu vị trí ảnh trước đó
+
+        function changeImage(step) {
+            currentIndex += step;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex >= images.length) currentIndex = 0;
+            updateGallery();
+        }
+
+        function selectImage(index) {
+            currentIndex = index;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            let mainImage = document.getElementById("mainImage");
+            let direction = currentIndex > prevIndex ? "left" : "right";
+            prevIndex = currentIndex; // Cập nhật vị trí cũ
+
+            // Xác định hướng trượt
+            mainImage.classList.add(direction === "left" ? "slide-left" : "slide-right");
+
+            setTimeout(() => {
+                mainImage.src = images[currentIndex];
+                mainImage.classList.remove("slide-right", "slide-left"); // Xóa hiệu ứng cũ
+            }, 500); // Chờ 300ms để ảnh cũ trượt đi
+
+            let thumbnails = document.querySelectorAll(".thumbnail");
+            thumbnails.forEach((thumb, index) => {
+                thumb.classList.toggle("active", index === currentIndex);
+            });
+        }
+
+        // function updateGallery() {
+        //     document.getElementById("mainImage").src = images[currentIndex];
+        //     let mainImage = document.getElementById("mainImage");
+        //     mainImage.classList.add("fade-out");
+
+        //     setTimeout(() => {
+        //     mainImage.src = images[currentIndex];
+        //     mainImage.classList.remove("fade-out");
+        //     }, 300); // Chờ 300ms để ảnh cũ mờ dần trước khi đổi ảnh mới
+
+        //     let thumbnails = document.querySelectorAll(".thumbnail");
+        //     thumbnails.forEach((thumb, index) => {
+        //     thumb.classList.toggle("active", index === currentIndex);
+        //     });
+        // }
+    </script>
+
+</body>
+</html>

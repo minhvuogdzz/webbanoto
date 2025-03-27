@@ -2,9 +2,8 @@ function loadPage(page) {
     fetch(page)
         .then(response => response.text())
         .then(data => {
-            document.getElementById('content').innerHTML = data;
-
-            //Kiem tra neu la dashboard thi load chart
+            document.querySelector('.content').innerHTML = data;
+            // Kiểm tra nếu là dashboard thì load chart
             if (page === "dashboard.html") {
                 loadDashboardChart();
             }
