@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.ok) {
                 alert("Đăng nhập thành công!");
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("username", data.username); // Store username
-                localStorage.setItem("email", emailOrUser); // Store email
+                localStorage.setItem("username", data.username); 
+                localStorage.setItem("email", emailOrUser); 
                 setTimeout(() => {
                     window.location.href = "index.html";
                 }, 500);

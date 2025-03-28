@@ -173,7 +173,10 @@ const botResponses =  {
     "mvd có đẳng cấp ko?": "Quá đẳng cấp là quá đẳng cấp😘😘 ",
     "vn là gì" : "Nước Cộng Hoà Xã Hội Chủ Nghĩa Việt Nam muôn năm🇻🇳 - Đảng Cộng Sản Việt Nam muôn năm 🇻🇳",
     "em tên gì ?" : "Em tên Nhung xăm family trên lưng",
-    "họ gọi anh là cờ đỏ" : "Cờ đỏ sao vàng anh ơi 🇻🇳"
+    "họ gọi anh là cờ đỏ" : "Cờ đỏ sao vàng anh ơi 🇻🇳",
+    "bộ máy anh huy auto" : "Bộ máy Anh Huy Auto bao gồm Tổng Giám đốc: Dương Minh Vương, Trợ lý Giám đốc: Lưu Công Hải, Phó giám đốc: Nguyễn Hữu Trọng Anh - Nguyễn Đức Dũng, Lễ tân: Nguyễn Đức Việt, Trưởng phòng Marketing: Lưu Công Hải. Mỗi thành viên đều có chuyên môn cao và tâm huyết với công việc.",
+    "tuyển dụng" : "Nếu bạn có đam mê về ô tô hay muốn tìm kiếm việc làm hãy về đội chúng tôi, mọi thắc mắc xin liên hệ lễ tân Nguyễn Đức Việt",
+    "giảng viên nhập môn cnpm" : "Giảng viên môn học này là thầy Nguyễn Đức Anh, một giảng viên có chuyên môn cao và nhiệt huyết trong việc giảng dạy. Thầy luôn sẵn sàng hỗ trợ sinh viên trong quá trình học tập và nghiên cứu.",
 };
 
 const createMessageElement = (content, classes) => {
@@ -194,7 +197,7 @@ const handleOutgoingMessage = (e) => {
     chatBody.appendChild(outgoingMessageDiv);
     messageInput.value = '';
 
-    setTimeout(() => handleIncomingMessage(userData.message), 1000); // Simulate bot response delay
+    setTimeout(() => handleIncomingMessage(userData.message), 1000); 
 }
 
 const handleIncomingMessage = (userMessage) => {
@@ -209,7 +212,7 @@ const handleIncomingMessage = (userMessage) => {
 
     const incomingMessageDiv = createMessageElement(botMessageContent, "bot-message");
     chatBody.appendChild(incomingMessageDiv);
-    chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
+    chatBody.scrollTop = chatBody.scrollHeight; 
 }
 
 // Enter key event
