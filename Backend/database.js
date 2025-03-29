@@ -1,19 +1,14 @@
-const { MongoClient } = require("mongodb");
-
 const uri = process.env.MONGODB_URI;
-let db;
+const mongoose = require("mongoose");
 
-async function connectDB() {
-    if (db) return db;
-    try {
-        const client = new MongoClient(uri, { useUnifiedTopology: true });
-        await client.connect();
-        db = client.db();
-        return db;
-    } catch (error) {
-        console.error("Error connect with Database:", error);
-        throw error;
-    }
-}
+const connectDB = async () => {
+  try {
+    await mongoose.connect(uri);
+    console.log("✅ Kết nối MongoDB thành công!");
+  } catch (err) {
+    console.error("❌ Lỗi kết nối MongoDB:", err);
+    process.exit(1); // Dừng server nếu lỗi
+  }
+};
 
 module.exports = connectDB;

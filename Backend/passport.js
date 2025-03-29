@@ -1,6 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const connectDB = require("./database");
+const User = require("./models/user");
 
 passport.serializeUser((user, done) => {
     done(null, user.token);
@@ -16,9 +16,8 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:4000/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        const db = await connectDB();
         const email = profile.emails[0].value;
-        let user = await db.collection("users").findOne({ email });
+        let user = await User.findOne({ email });
 
         if (!user) {
             user = {
@@ -27,7 +26,7 @@ passport.use(new GoogleStrategy({
                 avatar: profile.photos[0].value,
                 createdAt: new Date()
             };
-            await db.collection("users").insertOne(user);
+            await User.insertOne(user);
         }
 
         done(null, { token: accessToken, email: user.email, name: user.name, avatar: user.avatar });
