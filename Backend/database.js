@@ -11,7 +11,7 @@ async function connectDB() {
         db = client.db();
         return db;
     } catch (error) {
-        console.error("Lỗi kết nối Database:", error);
+        console.error("Error connect with Database:", error);
         throw error;
     }
 }

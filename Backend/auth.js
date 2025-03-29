@@ -7,6 +7,8 @@ const passport = require("passport");
 function createAuthRouter(db) {
     const router = express.Router();
 
+
+    //Register
     router.post("/register", async (req, res) => {
         try {
             const { name, email, password } = req.body;
@@ -30,6 +32,7 @@ function createAuthRouter(db) {
         }
     });
 
+    //Login 
     router.post("/login", async (req, res) => {
         try {
             const { email, password } = req.body;
@@ -50,6 +53,7 @@ function createAuthRouter(db) {
         }
     });
 
+    //Check token return profile    
     router.get("/profile", async (req, res) => {
         try {
             const token = req.headers.authorization;
@@ -64,6 +68,7 @@ function createAuthRouter(db) {
         }
     });
 
+    //Google login
     router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
     router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/login.html" }), (req, res) => {

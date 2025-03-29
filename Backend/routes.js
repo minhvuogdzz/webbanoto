@@ -4,7 +4,7 @@ function createRoutes(db) {
     const router = express.Router();
 
     router.get("/status", (req, res) => {
-        res.json({ message: "API đang hoạt động" });
+        res.json({ message: "API active" });
     });
 
     router.get("/users", async (req, res) => {
@@ -12,8 +12,8 @@ function createRoutes(db) {
             const users = await db.collection("users").find().toArray();
             res.json(users);
         } catch (error) {
-            console.error("Lỗi lấy danh sách user:", error);
-            res.status(500).json({ message: "Lỗi server!" });
+            console.error("Error pull users list:", error);
+            res.status(500).json({ message: "Error server!" });
         }
     });
 

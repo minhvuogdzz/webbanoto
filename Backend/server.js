@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
+//Check .env
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -23,8 +24,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Connect to MongoDB only one time
 connectDB().then((db) => {
-    console.log("*Database connected");
+    console.log("*Database has connected succesfully!");
 
     app.use("/auth", createAuthRouter(db));
     app.use("/api", createRoutes(db));
@@ -40,8 +42,8 @@ connectDB().then((db) => {
     });
 
     app.listen(PORT, () => {
-        console.log(`*Server đang chạy tại: http://localhost:${PORT}`);
+        console.log(`*Server is running at: http://localhost:${PORT}`);
     });
 }).catch(err => {
-    console.error("#Lỗi kết nối Database:", err);
+    console.error("#Error connect with Database:", err);
 });
