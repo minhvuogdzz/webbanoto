@@ -46,7 +46,7 @@ function updateNavbar() {
     const loginBtn = document.getElementById("login-btn");
 
     if (email && token) {
-        loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
+        //loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
         loginBtn.href = "#"; // Không cho chuyển trang
         loginBtn.onclick = logoutUser; // Gán sự kiện đăng xuất
     } else {
