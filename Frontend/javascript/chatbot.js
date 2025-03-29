@@ -177,8 +177,17 @@ const botResponses =  {
     "bộ máy anh huy auto" : "Bộ máy Anh Huy Auto bao gồm Tổng Giám đốc: Dương Minh Vương, Trợ lý Giám đốc: Lưu Công Hải, Phó giám đốc: Nguyễn Hữu Trọng Anh - Nguyễn Đức Dũng, Lễ tân: Nguyễn Đức Việt, Trưởng phòng Marketing: Lưu Công Hải. Mỗi thành viên đều có chuyên môn cao và tâm huyết với công việc.",
     "tuyển dụng" : "Nếu bạn có đam mê về ô tô hay muốn tìm kiếm việc làm hãy về đội chúng tôi, mọi thắc mắc xin liên hệ lễ tân Nguyễn Đức Việt",
     "giảng viên nhập môn cnpm" : "Giảng viên môn học này là thầy Nguyễn Đức Anh, một giảng viên có chuyên môn cao và nhiệt huyết trong việc giảng dạy. Thầy luôn sẵn sàng hỗ trợ sinh viên trong quá trình học tập và nghiên cứu.",
-};
-
+    "tôi muốn tìm dòng xe toyota giá 1 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1 tỷ như Toyota Corolla Cross, Toyota Fortuner, Toyota Innova và Toyota Hilux. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 500 triệu" : "Toyota Vios là mẫu xe sedan giá rẻ nhất của Toyota, với mức giá khoảng 520 triệu VNĐ. Đây là lựa chọn lý tưởng cho những ai đang tìm kiếm một chiếc xe tiết kiệm nhiên liệu và chi phí vận hành thấp. Anh Huy Auto có sẵn xe để khách hàng tham khảo.",
+    "tôi muốn tìm dòng xe toyota giá 2 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 2 tỷ như Toyota Land Cruiser Prado, Toyota Fortuner và Toyota Alphard. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 800 triệu" : "Toyota có nhiều dòng xe trong khoảng giá 800 triệu như Toyota Corolla Cross, Toyota Innova và Toyota Hilux. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 1.5 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1.5 tỷ như Toyota Fortuner, Toyota Innova và Toyota Land Cruiser Prado. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 1.2 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1.2 tỷ như Toyota Fortuner, Toyota Innova và Toyota Land Cruiser Prado. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 1.8 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1.8 tỷ như Toyota Fortuner, Toyota Innova và Toyota Land Cruiser Prado. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 1.3 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1.3 tỷ như Toyota Fortuner, Toyota Innova và Toyota Land Cruiser Prado. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 1.4 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1.4 tỷ như Toyota Fortuner, Toyota Innova và Toyota Land Cruiser Prado. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+    "tôi muốn tìm dòng xe toyota giá 1.6 tỷ" : "Toyota có nhiều dòng xe trong khoảng giá 1.6 tỷ như Toyota Fortuner, Toyota Innova và Toyota Land Cruiser Prado. Tùy vào nhu cầu sử dụng và sở thích cá nhân, bạn có thể lựa chọn mẫu xe phù hợp nhất. Anh Huy Auto luôn sẵn sàng tư vấn chi tiết cho bạn.",
+}
 const createMessageElement = (content, classes) => {
     const div = document.createElement('div');
     div.classList.add("message", classes);

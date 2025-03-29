@@ -1,22 +1,23 @@
 const express = require("express");
-const connectDB = require("./database");
 
-const router = express.Router();
-let db;
+function createRoutes(db) {
+    const router = express.Router();
 
-// Lấy danh sách users
-router.get("/users", async (req, res) => {
-    if (!db) return res.status(500).json({ message: "Lỗi server, thử lại sau!" });
-    const users = await db.collection("users").find().toArray();
-    res.json(users);
-});
+    router.get("/status", (req, res) => {
+        res.json({ message: "API đang hoạt động" });
+    });
 
-// Thêm user mới từ form
-router.post("/users", async (req, res) => {
-    if (!db) return res.status(500).json({ message: "Lỗi server, thử lại sau!" });
-    const newUser = req.body;
-    await db.collection("users").insertOne(newUser);
-    res.json({ message: "User đã được thêm!" });
-});
+    router.get("/users", async (req, res) => {
+        try {
+            const users = await db.collection("users").find().toArray();
+            res.json(users);
+        } catch (error) {
+            console.error("Lỗi lấy danh sách user:", error);
+            res.status(500).json({ message: "Lỗi server!" });
+        }
+    });
 
-module.exports = router;
+    return router;
+}
+
+module.exports = createRoutes;

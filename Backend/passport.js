@@ -1,54 +1,39 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const User = require("./models/user");
 const connectDB = require("./database");
-require("dotenv").config();
 
-let db;
-
-passport.use(
-    new GoogleStrategy(
-        {
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: process.env.GOOGLE_REDIRECT_URI
-        },
-        async (accessToken, refreshToken, profile, done) => {
-            try {
-                console.log(" Google Login Success:", profile);
-
-                if (!db) {
-                    console.log("Connecting to MongoDB...");
-                    db = await connectDB();
-                }
-
-                console.log("Searching for user in database...");
-                let user = await User.findOne({ googleId: profile.id });
-
-                if (!user) {
-                    console.log("👤 User not found, creating new user...");
-                    user = await User.create({
-                        googleId: profile.id,
-                        name: profile.displayName,
-                        email: profile.emails[0].value,
-                        avatar: profile.photos[0].value
-                    });
-                }
-
-                console.log("User found or created:", user);
-                return done(null, user);
-            } catch (err) {
-                console.error("Error in Google authentication:", err);
-                return done(err, null);
-            }
-        }
-    )
-);
-
-passport.serializeUser((user, done) => done(null, user.id));
-passport.deserializeUser(async (id, done) => {
-    const user = await User.findById(id);
-    done(null, user);
+passport.serializeUser((user, done) => {
+    done(null, user.token);
 });
+
+passport.deserializeUser((token, done) => {
+    done(null, { token });
+});
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:4000/auth/google/callback"
+}, async (accessToken, refreshToken, profile, done) => {
+    try {
+        const db = await connectDB();
+        const email = profile.emails[0].value;
+        let user = await db.collection("users").findOne({ email });
+
+        if (!user) {
+            user = {
+                name: profile.displayName,
+                email: email,
+                avatar: profile.photos[0].value,
+                createdAt: new Date()
+            };
+            await db.collection("users").insertOne(user);
+        }
+
+        done(null, { token: accessToken, email: user.email, name: user.name, avatar: user.avatar });
+    } catch (error) {
+        done(error, null);
+    }
+}));
 
 module.exports = passport;
