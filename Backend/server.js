@@ -10,7 +10,6 @@ const userRoute = require("./Routes/UserRoute");
 const authRoute = require("./Routes/AuthRoute");
 const carRoute = require("./Routes/CarRoute");
 
-
 const app = express();
 const PORT = process.env.PORT || 4000;
 

@@ -75,3 +75,69 @@ function loadPage(url) {
     link.click(); 
     document.body.removeChild(link);
 }
+
+let allCars = [];
+
+async function FetchAllCars() {
+    try {
+        const response = await fetch('/api/cars');
+        allCars = await response.json();
+    } catch (error) {
+        console.error('Lỗi khi tải danh sách xe:', error);
+        throw error; // Ném lỗi để xử lý ở nơi gọi hàm
+    }
+    loadCars(allCars);
+}
+
+let filterByPriceCar = [];
+
+async function FilterByPrice(minPrice, maxPrice) {
+    try {
+        // Lọc trực tiếp từ allCars
+        filterByPriceCar = allCars.filter(car => 
+        car.Price >= minPrice && car.Price <= maxPrice
+        );
+        loadCars(filterByPriceCar); // Hiển thị kết quả lọc
+    } catch (allCars) {
+        console.error('Lỗi khi lọc xe theo giá:', error);
+        throw error;
+    }
+}
+
+// Hàm để hiển thị danh sách xe
+async function loadCars(cars) {
+    try {
+        // Lấy phần tử chứa danh sách xe
+        const carList = document.getElementById('car-list');
+        carList.innerHTML = ''; // Xóa nội dung cũ
+        // Duyệt qua từng xe và tạo HTML
+        cars.forEach(car => {
+            const carHTML = `
+                <div class="article" onclick="delayedRedirect(${car.id})">
+                    <div class="article-car">
+                        <div class="article-car-item act-1">
+                            <div>${car.Fuel || 'Động cơ Xăng'}</div>
+                        </div>
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="${car.URL || '/image/1.png'}" alt="${car.name}">
+                        </div>
+                        <div class="article-car-item act-3">${car.name}</div>
+                        <div class="article-car-item act-4">
+                            ${car.Price}
+                            <p style="font-size: 12px; position: absolute; top: -3px; right: 116px;">${car.currency || 'VNĐ'}</p>
+                        </div>
+                        <div class="article-car-item act-5">
+                            <div style="padding-right: 20px;">${car.seats || '5 chỗ'}</div>
+                            <div>|</div>
+                            <div style="padding-left: 20px;">${car.transmission || 'Số tự động'}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            carList.insertAdjacentHTML('beforeend', carHTML);
+        });
+    } catch (error) {
+        console.error('Lỗi khi tải danh sách xe:', error);
+        document.getElementById('car-list').innerHTML = '<p>Không thể tải danh sách xe. Vui lòng thử lại sau.</p>';
+    }
+}

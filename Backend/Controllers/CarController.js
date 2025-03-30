@@ -24,7 +24,6 @@ exports.filterCarsByPrice = async (req, res) => {
         if (maxPrice) {
             query.Price = { ...query.Price, $lte: parseInt(maxPrice) };
         }
-
         const cars = await Car.find(query);
         res.json(cars);
     } catch (error) {

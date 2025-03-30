@@ -63,12 +63,12 @@
             <div class="filter-group">
                 <h3 onclick="toggleFilter(this)">Price of Vehicle <i class="fa fa-chevron-up"></i></h3>
                 <div class="filter-options">
-                    <div class="filter-option" onclick="selectOption(this)">200M - 400M <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">400M - 600M <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">600M - 800M <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">800M - 1B <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">> 1B <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">All</i></div>
+                    <div class="filter-option" onclick="selectOption(this); FilterByPrice(200000000,400000000)">200M - 400M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); FilterByPrice(400000000,600000000)">400M - 600M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); FilterByPrice(600000000,800000000)">600M - 800M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); FilterByPrice(800000000,1000000000)">800M - 1B <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); FilterByPrice(1000000000,99999999999)">> 1B <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); FilterByPrice(0,99999999999)">All</i></div>
                 </div>
             </div>
     
@@ -87,7 +87,7 @@
             <div class="filter-group">
                 <h3 onclick="toggleFilter(this)">Fuel <i class="fa fa-chevron-up"></i></h3>
                 <div class="filter-options">
-                    <div class="filter-option" onclick="selectOption(this)">Gasoline<i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this) ; applyFilters() ">Gasoline<i class="fa fa-arrow-right"></i></div>
                     <div class="filter-option" onclick="selectOption(this)">Oil <i class="fa fa-arrow-right"></i></div>
                     <div class="filter-option" onclick="selectOption(this)">Electric<i class="fa fa-bolt"></i></div>
                     <div class="filter-option" onclick="selectOption(this)">Gasoline + Oil <i class="fa fa-arrow-right"></i></div>
@@ -124,48 +124,9 @@
         </div>
     </div>
     <script>
-        // Hàm để hiển thị danh sách xe
-        async function loadCars() {
-            try {
-                // Gọi API để lấy dữ liệu xe
-                const response = await fetch('/api/cars');
-                const cars = await response.json();
-                
-                // Lấy phần tử chứa danh sách xe
-                const carList = document.getElementById('car-list');
-                carList.innerHTML = ''; // Xóa nội dung cũ
-                // Duyệt qua từng xe và tạo HTML
-                cars.forEach(car => {
-                    console.log(car.id);
-                    const carHTML = `
-                        <div class="article" onclick="delayedRedirect(${car.id})">
-                            <div class="article-car">
-                                <div class="article-car-item act-1">
-                                    <div>${car.Fuel || 'Động cơ Xăng'}</div>
-                                </div>
-                                <div class="article-car-item act-2">
-                                    <img class="act-img" src="${car.URL}" alt="${car.name}">
-                                </div>
-                                <div class="article-car-item act-3">${car.name}</div>
-                                <div class="article-car-item act-4">
-                                    ${car.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                                </div>
-                                <div class="article-car-item act-5">
-                                    <div style="padding-right: 20px;">${car.seats || '5 chỗ'}</div>
-                                    <div>|</div>
-                                    <div style="padding-left: 20px;">${car.transmission || 'Số tự động'}</div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    carList.insertAdjacentHTML('beforeend', carHTML);
-                });
-            } catch (error) {
-                console.error('Lỗi khi tải danh sách xe:', error);
-                document.getElementById('car-list').innerHTML = '<p>Không thể tải danh sách xe. Vui lòng thử lại sau.</p>';
-            }
-        }
-        document.addEventListener('DOMContentLoaded', loadCars);
+        function applyFilters() { console.log("A"); }
+
+        document.addEventListener('DOMContentLoaded', FetchAllCars);
         // Hàm chuyển hướng (sửa lại để truyền ID xe)
         function delayedRedirect(carId) {
             setTimeout(() => {
