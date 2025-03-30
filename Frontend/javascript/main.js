@@ -46,7 +46,7 @@ function updateNavbar() {
     const loginBtn = document.getElementById("login-btn");
 
     if (email && token) {
-        //loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
+        loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
         loginBtn.href = "#"; // Không cho chuyển trang
         loginBtn.onclick = logoutUser; // Gán sự kiện đăng xuất
     } else {
@@ -105,39 +105,51 @@ async function FilterByPrice(minPrice, maxPrice) {
 }
 
 // Hàm để hiển thị danh sách xe
-async function loadCars(cars) {
+async function loadCars() {
     try {
+        // Gọi API để lấy dữ liệu xe
+        const response = await fetch('/api/cars');
+        const cars = await response.json();
+        
         // Lấy phần tử chứa danh sách xe
         const carList = document.getElementById('car-list');
-        carList.innerHTML = ''; // Xóa nội dung cũ
+        carList.innerHTML = ''; 
         // Duyệt qua từng xe và tạo HTML
         cars.forEach(car => {
+            console.log(car.id);
             const carHTML = `
                 <div class="article" onclick="delayedRedirect(${car.id})">
                     <div class="article-car">
                         <div class="article-car-item act-1">
-                            <div>${car.Fuel || 'Động cơ Xăng'}</div>
-                        </div>
-                        <div class="article-car-item act-2">
-                            <img class="act-img" src="${car.URL || '/image/1.png'}" alt="${car.name}">
-                        </div>
-                        <div class="article-car-item act-3">${car.name}</div>
-                        <div class="article-car-item act-4">
-                            ${car.Price}
-                            <p style="font-size: 12px; position: absolute; top: -3px; right: 116px;">${car.currency || 'VNĐ'}</p>
-                        </div>
-                        <div class="article-car-item act-5">
-                            <div style="padding-right: 20px;">${car.seats || '5 chỗ'}</div>
-                            <div>|</div>
-                            <div style="padding-left: 20px;">${car.transmission || 'Số tự động'}</div>
-                        </div>
+                        <div>${car.Fuel || 'Động cơ Xăng'}</div>
                     </div>
-                </div>
-            `;
+                    <div class="article-car-item act-2">
+                        <img class="act-img" src="${car.URL}" alt="${car.name}">
+                    </div>
+                    <div class="article-car-item act-3">${car.name}</div>
+                    <div class="article-car-item act-4">
+                        ${car.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                    </div>
+                    <div class="article-car-item act-5">
+                    <div style="padding-right: 20px;">${car.seats ? `${car.seats} chỗ` : '5 chỗ'}</div>
+                    <div>|</div>
+                <div style="padding-left: 20px;">${car.transmission ? car.transmission : 'CVT'}</div>
+            </div>
+        </div>
+    </div>`;
             carList.insertAdjacentHTML('beforeend', carHTML);
         });
     } catch (error) {
         console.error('Lỗi khi tải danh sách xe:', error);
         document.getElementById('car-list').innerHTML = '<p>Không thể tải danh sách xe. Vui lòng thử lại sau.</p>';
     }
+}
+
+document.addEventListener('DOMContentLoaded', loadCars);
+
+// Hàm chuyển hướng (sửa lại để truyền ID xe)
+function delayedRedirect(carId) {
+    setTimeout(() => {
+        window.location.href = `detailCar.html?id=${carId}`;
+    }, 500);
 }

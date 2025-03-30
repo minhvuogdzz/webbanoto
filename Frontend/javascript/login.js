@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginForm");
 
     if (!loginForm) {
-        //console.error("Không tìm thấy phần tử #loginForm");
+        console.error("Không tìm thấy phần tử #loginForm");
         return;
     }
 

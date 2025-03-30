@@ -17,7 +17,6 @@ body{
     height: 100vh;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 85px 1fr 200px;
-    /* grid-auto-rows: minmax(60px, auto); */
     grid-template-areas:
         "header header "
         "sidebar content"
@@ -28,19 +27,12 @@ body{
 .header {
     grid-area: header;
     position: fixed;
-    /* Đặt vị trí cố định */
     top: 0;
-    /* Căn trên cùng */
     left: 0;
-    /* Căn trái */
     width: 100%;
-    /* Chiếm toàn bộ chiều rộng */
     height: 85px;
-    /* Chiều cao của header */
     background: linear-gradient(to right, #1a1a1a, #202020, #393939);
-    /* Màu nền của header */
     z-index: 999;
-    /* Đảm bảo header nằm trên các phần tử khác */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -55,7 +47,7 @@ body{
     }
 
     50% {
-        filter: drop-shadow(0px 0px 20px rgb(168, 0, 0));
+        filter: drop-shadow(0px 0px 20px rgb(177, 42, 42));
     }
 
     100% {
@@ -114,12 +106,9 @@ body{
 }
 
 .nav-links a:hover {
-    color: #560000;
-    text-shadow: 0px 0px 3px #ffffff, 0px 0px 5px #ffffff; /* Tạo viền xanh */
+    color: #c71313;
 }
 
-
-/* Sidebar */
 .sidebar {
     grid-area: sidebar;
     position: fixed;
@@ -134,7 +123,6 @@ body{
     padding: 10px 20px 20px 20px;
 }
 
-/* Tiêu đề của bộ lọc */
 .filter-title {
     font-size: 24px;
     font-weight: 600;
@@ -144,12 +132,10 @@ body{
     margin-bottom: 15px;
 }
 
-/* Nhóm bộ lọc */
 .filter-group {
     margin-bottom: 15px;
 }
 
-/* Tiêu đề của từng nhóm bộ lọc */
 .filter-group h3 {
     font-size: 18px;
     font-weight: 500;
@@ -160,21 +146,17 @@ body{
     cursor: pointer;
 }
 
-/* Mũi tên trong tiêu đề bộ lọc */
 .filter-group h3 i {
     transition: transform 0.3s ease-in-out;
-    transform: rotate(180deg); /* Luôn chĩa xuống từ đầu */
+    transform: rotate(180deg); 
 }
 
-/* Khi danh sách mở, xoay mũi tên */
 .filter-group h3 i.rotate {
     transform: rotate(0deg);
 }
 
-
-/* Danh sách các tùy chọn lọc */
 .filter-options {
-    max-height: 0;  /* Ban đầu không hiển thị */
+    max-height: 0;  
     overflow: hidden;
     transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
@@ -200,7 +182,6 @@ body{
     opacity: 1;
 }
 
-/* Tùy chọn bộ lọc */
 .filter-option {
     display: flex;
     align-items: center;
@@ -245,7 +226,7 @@ body{
 .content .content-title .content-title-heading {
     color: #fff;
     font-size: 36px;
-    margin-left: 22px;
+    padding-left: 22px;
     line-height: 50px;
 }
 
@@ -254,7 +235,7 @@ body{
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr)); 
     grid-auto-rows: minmax(330px, auto); 
-    gap: 15px; 
+    gap: 5px; 
 }
 
 .content .content-info .article {
@@ -263,17 +244,34 @@ body{
     align-items: center;
 }
 
-.content .article-car {
-    background-color:  #181a1b;
+@keyframes smoothScale {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.article-car {
+    background-color: #181a1b;
     border: 0px solid #fff;
     color: #bcb8b1;
     display: grid;
-    height: 300px;
+    height: 290px;
     grid-template-rows: 36px 130px 44px 50px 40px;
-    width: 350px;
+    width: 340px;
     border-radius: 30px;
     border-color: #00000000;
     overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.article-car:hover {
+    border: 0px solid rgb(118, 7, 7);
+    box-shadow: 0px 0px 30px 5px rgba(255, 0, 0, 0.9);
+    animation: smoothScale 0.3s forwards ease-in-out;
+    cursor: pointer;
 }
 
 .content .article-car .article-car-item {
@@ -306,14 +304,23 @@ body{
     position: absolute;
     border-radius: 30px;
     transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
-    box-shadow: 0.3s ease-in-out;
     border: 0px solid transparent;
 }
 
-.article-car:hover {
-    border: 0px solid rgb(118, 7, 7);
-    box-shadow: 0px 0px 25px 2px rgba(255, 0, 0, 0.7);
+@media (max-width: 768px) {
+    .content .content-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
 }
+
+@media (max-width: 480px) {
+    .content .content-info {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+}
+
 
 /* footer */
 .footer {
@@ -366,32 +373,32 @@ body{
 }
 
 .chatbot {
-    position: absolute;
-    top: 1220px;
-    left: 1320px;
-    z-index: 0;
+    position: fixed; 
+    bottom: 22px;
+    right: 22px; 
+    z-index: 1000; 
 }
 
 .chat-button {
-    position: relative;
+    background-color: #a40e08;
+    border: none;
+    border-radius: 50%;
+    width: 60px; 
     height: 60px;
-    width: 60px;
-    border-radius: 30px;
-    background-color: #3498db2a;
-    color: #fff;
-    border-color: #ffffff;
     cursor: pointer;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
 }
 
 .chat-button:hover {
-    background-color: #a10707;
-    color: #fff;
-    border-color: #ffffff;
+    transform: scale(1.2); 
 }
 
 .chatbot-logo {
-    position: absolute;
-    top: 3px;
-    left: 3px;
+    fill: rgb(0, 0, 0); 
+    width: 40px;
+    height: 40px;
 }
