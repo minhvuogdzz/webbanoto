@@ -164,25 +164,24 @@ async function loadCars(cars) {
         cars.forEach(car => {
             const carHTML = `
                 <div class="article" onclick="delayedRedirect(${car.id})">
-                    <div class="article-car">
-                        <div class="article-car-item act-1">
-                            <div>${car.Fuel || 'Động cơ Xăng'}</div>
-                        </div>
-                        <div class="article-car-item act-2">
-                            <img class="act-img" src="${car.URL || '/image/1.png'}" alt="${car.name}">
-                        </div>
-                        <div class="article-car-item act-3">${car.name}</div>
-                        <div class="article-car-item act-4">
-                            ${car.Price}
-                            <p style="font-size: 12px; position: absolute; top: -3px; right: 116px;">${car.currency || 'VNĐ'}</p>
-                        </div>
-                        <div class="article-car-item act-5">
-                            <div style="padding-right: 20px;">${car.seats || '5 chỗ'}</div>
+                            <div class="article-car">
+                                <div class="article-car-item act-1">
+                                <div>${car.Fuel || 'Động cơ Xăng'}</div>
+                            </div>
+                            <div class="article-car-item act-2">
+                                <img class="act-img" src="${car.URL}" alt="${car.name}">
+                            </div>
+                            <div class="article-car-item act-3">${car.name}</div>
+                            <div class="article-car-item act-4">
+                                ${car.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                            </div>
+                            <div class="article-car-item act-5">
+                            <div style="padding-right: 20px;">${car.seats ? `${car.seats} chỗ` : '5 chỗ'}</div>
                             <div>|</div>
-                            <div style="padding-left: 20px;">${car.transmission || 'Số tự động'}</div>
-                        </div>
+                        <div style="padding-left: 20px;">${car.transmission ? car.transmission : 'CVT'}</div>
                     </div>
                 </div>
+            </div>
             `;
             carList.insertAdjacentHTML('beforeend', carHTML);
         });
@@ -190,4 +189,16 @@ async function loadCars(cars) {
         console.error('Lỗi khi tải danh sách xe:', error);
         document.getElementById('car-list').innerHTML = '<p>Không thể tải danh sách xe. Vui lòng thử lại sau.</p>';
     }
+}
+
+document.getElementById("searchInput").addEventListener("input", function(event) {
+    updateNameFilter(event.target.value);
+});
+
+document.addEventListener('DOMContentLoaded', FetchAllCars);
+// Hàm chuyển hướng (sửa lại để truyền ID xe)
+function delayedRedirect(carId) {
+setTimeout(() => {
+    window.location.href = `detailCar.html?id=${carId}`;
+}, 500);
 }
