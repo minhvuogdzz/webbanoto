@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user"); // Import User Model
 
 // Đăng ký tài khoản
-exports.register = async (req, res) => {
+const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         const normalizedEmail = email.toLowerCase().trim();
@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
 };
 
 // Đăng nhập
-exports.login = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const normalizedEmail = email.toLowerCase().trim();
@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
 };
 
 // Lấy thông tin profile từ token
-exports.getProfile = async (req, res) => {
+const getProfile = async (req, res) => {
     try {
         const token = req.headers.authorization;
         if (!token) return res.status(401).json({ message: "Không có token!" });
@@ -70,7 +70,7 @@ exports.getProfile = async (req, res) => {
 };
 
 // Google Login
-exports.googleCallback = (req, res) => {
+const googleCallback = (req, res) => {
     const user = req.user;
     const userInfo = {
         token: req.session.passport.user,
@@ -83,7 +83,16 @@ exports.googleCallback = (req, res) => {
 };
 
 // Đăng xuất
-exports.logout = (req, res) => {
+const logout = (req, res) => {
     req.logout();
     res.redirect("/index.html");
+};
+
+// Export tất cả hàm
+module.exports = {
+    register,
+    login,
+    getProfile,
+    googleCallback,
+    logout
 };
