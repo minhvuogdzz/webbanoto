@@ -46,6 +46,7 @@ exports.login = async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        console.log("Token:", token); // Log token for debugging
         res.json({ message: "Đăng nhập thành công!", token, email: user.email });
     } catch (error) {
         console.error("Lỗi đăng nhập:", error);

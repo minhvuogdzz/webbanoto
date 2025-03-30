@@ -252,8 +252,9 @@ body{
 .content .content-info {
     grid-area: content-info;
     display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
-    grid-template-rows: repeat(3, 330px);
+    grid-template-columns: repeat(3, minmax(300px, 1fr)); 
+    grid-auto-rows: minmax(330px, auto); 
+    gap: 15px; 
 }
 
 .content .content-info .article {
@@ -287,7 +288,7 @@ body{
 }
 
 .article-car .act-3 {
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 1000;
     line-height: 40px;
 }
@@ -295,7 +296,7 @@ body{
 .article-car .act-4 {
     font-weight: bold;
     position: relative;
-    font-size: 30px;
+    font-size: 21px;
     line-height: 50px;
 }
 

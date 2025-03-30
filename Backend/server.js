@@ -18,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
+
 //Check .env
 app.use(session({
     secret: process.env.SESSION_SECRET,
