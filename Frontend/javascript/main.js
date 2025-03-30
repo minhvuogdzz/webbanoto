@@ -75,81 +75,119 @@ function loadPage(url) {
     link.click(); 
     document.body.removeChild(link);
 }
-
 let allCars = [];
-
+let currentFilters = {
+    name : '',
+    minPrice: null,
+    maxPrice: null,
+    type: 'all',
+    fuel: 'all'
+};
+// Hàm tải tất cả xe
 async function FetchAllCars() {
     try {
         const response = await fetch('/api/cars');
         allCars = await response.json();
+        applyAllFilters(); // Áp dụng bộ lọc ngay sau khi tải dữ liệu
     } catch (error) {
         console.error('Lỗi khi tải danh sách xe:', error);
-        throw error; // Ném lỗi để xử lý ở nơi gọi hàm
-    }
-    loadCars(allCars);
-}
-
-let filterByPriceCar = [];
-
-async function FilterByPrice(minPrice, maxPrice) {
-    try {
-        // Lọc trực tiếp từ allCars
-        filterByPriceCar = allCars.filter(car => 
-        car.Price >= minPrice && car.Price <= maxPrice
-        );
-        loadCars(filterByPriceCar); // Hiển thị kết quả lọc
-    } catch (allCars) {
-        console.error('Lỗi khi lọc xe theo giá:', error);
         throw error;
     }
 }
-
-// Hàm để hiển thị danh sách xe
-async function loadCars() {
+// Hàm áp dụng tất cả bộ lọc
+function applyAllFilters() {
     try {
-        // Gọi API để lấy dữ liệu xe
-        const response = await fetch('/api/cars');
-        const cars = await response.json();
-        
+        let filteredCars = [...allCars];
+        //Lọc theo tên
+        if (currentFilters.name.trim() !== '') {
+            const searchTerm = currentFilters.name.toLowerCase();
+            filteredCars = filteredCars.filter(car => 
+                car.name.toLowerCase().includes(searchTerm)
+            );
+        }
+        // Lọc theo giá
+        if (currentFilters.minPrice !== null || currentFilters.maxPrice !== null) {
+            filteredCars = filteredCars.filter(car => {
+                const priceMatch = 
+                    (currentFilters.minPrice === null || car.Price >= currentFilters.minPrice) &&
+                    (currentFilters.maxPrice === null || car.Price <= currentFilters.maxPrice);
+                return priceMatch;
+            });
+        }
+        // Lọc theo loại xe
+        if (currentFilters.type !== 'all') {
+            filteredCars = filteredCars.filter(car => 
+                car.Type.toLowerCase() === currentFilters.type.toLowerCase()
+            );
+        }
+        // Lọc theo nhiên liệu
+        if (currentFilters.fuel !== 'all') {
+            filteredCars = filteredCars.filter(car => 
+                car.Fuel.toLowerCase() === currentFilters.fuel.toLowerCase()
+            );
+        }
+        // Hiển thị kết quả
+        loadCars(filteredCars);
+    } catch (error) {
+        console.error('Lỗi khi áp dụng bộ lọc:', error);
+        throw error;
+    }
+}
+function updateNameFilter(name) {
+    currentFilters.name = name;
+    applyAllFilters();
+}
+// Các hàm cập nhật bộ lọc
+function updatePriceFilter(minPrice, maxPrice) {
+    currentFilters.minPrice = minPrice;
+    currentFilters.maxPrice = maxPrice;
+    applyAllFilters();
+}
+
+function updateTypeFilter(type) {
+    currentFilters.type = type;
+    applyAllFilters();
+}
+
+function updateFuelFilter(fuel) {
+    currentFilters.fuel = fuel;
+    applyAllFilters();
+}
+
+// Hàm hiển thị danh sách xe (giữ nguyên)
+async function loadCars(cars) {
+    try {
         // Lấy phần tử chứa danh sách xe
         const carList = document.getElementById('car-list');
-        carList.innerHTML = ''; 
+        carList.innerHTML = ''; // Xóa nội dung cũ
         // Duyệt qua từng xe và tạo HTML
         cars.forEach(car => {
-            console.log(car.id);
             const carHTML = `
                 <div class="article" onclick="delayedRedirect(${car.id})">
                     <div class="article-car">
                         <div class="article-car-item act-1">
-                        <div>${car.Fuel || 'Động cơ Xăng'}</div>
+                            <div>${car.Fuel || 'Động cơ Xăng'}</div>
+                        </div>
+                        <div class="article-car-item act-2">
+                            <img class="act-img" src="${car.URL || '/image/1.png'}" alt="${car.name}">
+                        </div>
+                        <div class="article-car-item act-3">${car.name}</div>
+                        <div class="article-car-item act-4">
+                            ${car.Price}
+                            <p style="font-size: 12px; position: absolute; top: -3px; right: 116px;">${car.currency || 'VNĐ'}</p>
+                        </div>
+                        <div class="article-car-item act-5">
+                            <div style="padding-right: 20px;">${car.seats || '5 chỗ'}</div>
+                            <div>|</div>
+                            <div style="padding-left: 20px;">${car.transmission || 'Số tự động'}</div>
+                        </div>
                     </div>
-                    <div class="article-car-item act-2">
-                        <img class="act-img" src="${car.URL}" alt="${car.name}">
-                    </div>
-                    <div class="article-car-item act-3">${car.name}</div>
-                    <div class="article-car-item act-4">
-                        ${car.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                    </div>
-                    <div class="article-car-item act-5">
-                    <div style="padding-right: 20px;">${car.seats ? `${car.seats} chỗ` : '5 chỗ'}</div>
-                    <div>|</div>
-                <div style="padding-left: 20px;">${car.transmission ? car.transmission : 'CVT'}</div>
-            </div>
-        </div>
-    </div>`;
+                </div>
+            `;
             carList.insertAdjacentHTML('beforeend', carHTML);
         });
     } catch (error) {
         console.error('Lỗi khi tải danh sách xe:', error);
         document.getElementById('car-list').innerHTML = '<p>Không thể tải danh sách xe. Vui lòng thử lại sau.</p>';
     }
-}
-
-document.addEventListener('DOMContentLoaded', loadCars);
-
-// Hàm chuyển hướng (sửa lại để truyền ID xe)
-function delayedRedirect(carId) {
-    setTimeout(() => {
-        window.location.href = `detailCar.html?id=${carId}`;
-    }, 500);
 }

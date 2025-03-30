@@ -35,10 +35,9 @@
 
             <div class="search-bar">
                 <i class="fa fa-bars"></i>
-                <input type="text" placeholder="Which car do you want to refer to ?">
-                <i class="fa fa-search"></i>
+                <input id = "searchInput" type="text" placeholder="Which car do you want to refer to ?">
+                <i class="fa fa-search" id="searchButton" onclick="updateNameFilter(document.getElementById('searchInput').value)"></i>
             </div>
-
             <nav class="nav-links">
                 <a href="manager.html"><i class="fa fa-print"></i>
                     <p>Admin Manager</p>
@@ -63,35 +62,31 @@
             <div class="filter-group">
                 <h3 onclick="toggleFilter(this)">Price of Vehicle <i class="fa fa-chevron-up"></i></h3>
                 <div class="filter-options">
-                    <div class="filter-option" onclick="selectOption(this)">200M - 400M <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">400M - 600M <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">600M - 800M <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">800M - 1B <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">> 1B <i class="fa fa-star"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">All</i></div>
+                    <div class="filter-option" onclick="selectOption(this); updatePriceFilter(400000000,600000000)">400M - 600M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updatePriceFilter(600000000,800000000)">600M - 800M <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updatePriceFilter(800000000,1000000000)">800M - 1B <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updatePriceFilter(1000000000,99999999999)">> 1B <i class="fa fa-star"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updatePriceFilter(0,99999999999)">All</i></div>
                 </div>
             </div>
-    
             <!-- Bộ lọc theo loại xe -->
             <div class="filter-group">
                 <h3 onclick="toggleFilter(this)">Type of Vehicle <i class="fa fa-chevron-up"></i></h3>
                 <div class="filter-options">
-                    <div class="filter-option" onclick="selectOption(this)">Sedan <i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">SUV <i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">Service Car <i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">Pickup Truck<i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">All</i></div>
+                    <div class="filter-option" onclick="selectOption(this); updateTypeFilter('Sedan')">Sedan <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this);updateTypeFilter('SUV')">SUV <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updateTypeFilter('Service Car')">Service Car <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updateTypeFilter('Truck')" >Pickup Truck<i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updateTypeFilter('all')">All</i></div>
                 </div>
             </div>
             <!-- Bộ lọc theo dòng xe -->
             <div class="filter-group">
                 <h3 onclick="toggleFilter(this)">Fuel <i class="fa fa-chevron-up"></i></h3>
                 <div class="filter-options">
-                    <div class="filter-option" onclick="selectOption(this)">Gasoline<i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">Oil <i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">Electric<i class="fa fa-bolt"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">Gasoline + Oil <i class="fa fa-arrow-right"></i></div>
-                    <div class="filter-option" onclick="selectOption(this)">All</i></div>
+                    <div class="filter-option" onclick="selectOption(this); updateFuelFilter('Gas')">Gasoline<i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); updateFuelFilter('OIL')">Oil <i class="fa fa-arrow-right"></i></div>
+                    <div class="filter-option" onclick="selectOption(this); filterCarsByFuel('all') ">All</i></div>
                 </div>
             </div>
         </div>
@@ -123,5 +118,20 @@
             </button>
         </div>
     </div>
+    <script>
+
+        document.getElementById("searchInput").addEventListener("input", function(event) {
+                updateNameFilter(event.target.value);
+            });
+
+
+        document.addEventListener('DOMContentLoaded', FetchAllCars);
+        // Hàm chuyển hướng (sửa lại để truyền ID xe)
+        function delayedRedirect(carId) {
+            setTimeout(() => {
+                window.location.href = `detailCar.html?id=${carId}`;
+            }, 500);
+        }
+        </script>
 </body>
 </html>

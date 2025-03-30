@@ -10,14 +10,14 @@ const userRoute = require("./Routes/UserRoute");
 const authRoute = require("./Routes/AuthRoute");
 const carRoute = require("./Routes/CarRoute");
 
+
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
 
 connectDB();
-
 //Check .env
 app.use(session({
     secret: process.env.SESSION_SECRET,
