@@ -148,8 +148,7 @@
                                 </div>
                                 <div class="article-car-item act-3">${car.name}</div>
                                 <div class="article-car-item act-4">
-                                    ${car.Price}
-                                    <p style="font-size: 12px; position: absolute; top: -3px; right: 116px;">${car.currency || 'VNĐ'}</p>
+                                    ${car.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </div>
                                 <div class="article-car-item act-5">
                                     <div style="padding-right: 20px;">${car.seats || '5 chỗ'}</div>
