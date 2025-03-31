@@ -32,22 +32,31 @@ const register = async (req, res) => {
 // Đăng nhập
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const normalizedEmail = email.toLowerCase().trim();
-        const user = await User.findOne({ email: normalizedEmail });
+        const { email, username, password } = req.body;
+
+        let user;
+        if (username) {
+            // Đăng nhập bằng username (admin)
+            user = await User.findOne({ username, role: "admin" });
+        } else if (email) {
+            // Đăng nhập bằng email (người dùng)
+            user = await User.findOne({ email });
+        } else {
+            return res.status(400).json({ message: "Vui lòng nhập email hoặc username!" });
+        }
 
         if (!user) {
-            return res.status(400).json({ message: "Email hoặc mật khẩu không đúng!" });
+            return res.status(400).json({ message: "Tài khoản hoặc mật khẩu không đúng!" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Email hoặc mật khẩu không đúng!" });
+            return res.status(400).json({ message: "Tài khoản hoặc mật khẩu không đúng!" });
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
         console.log("Token:", token); // Log token for debugging
-        res.json({ message: "Đăng nhập thành công!", token, email: user.email });
+        res.json({ message: "Đăng nhập thành công!", token, email: user.email, username: user.username, role: user.role });
     } catch (error) {
         console.error("Lỗi đăng nhập:", error);
         res.status(500).json({ message: "Lỗi server!" });
@@ -57,12 +66,14 @@ const login = async (req, res) => {
 // Lấy thông tin profile từ token
 const getProfile = async (req, res) => {
     try {
-        const token = req.headers.authorization;
-        if (!token) return res.status(401).json({ message: "Không có token!" });
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findOne({ _id: decoded.userId });
-        if (!user) return res.status(404).json({ message: "Không tìm thấy user!" });
-        res.json({ name: user.name, email: user.email, createdAt: user.createdAt });
+        console.log("Thông tin user từ middleware:", req.user); // Debug thông tin user từ middleware
+        const user = await User.findOne({ _id: req.user.userId });
+        if (!user) {
+            console.error("Không tìm thấy user với ID:", req.user.userId); // Debug user ID
+            return res.status(404).json({ message: "Không tìm thấy user!" });
+        }
+        console.log("Thông tin user từ database:", user); // Debug thông tin user từ database
+        res.json({ name: user.name, email: user.email, role: user.role, createdAt: user.createdAt }); // Trả về role
     } catch (error) {
         console.error("Lỗi lấy profile:", error);
         res.status(500).json({ message: "Lỗi server!" });

@@ -12,21 +12,19 @@ function toggleFilter(header) {
     let icon = header.querySelector('i');
 
     if (options.classList.contains('visible')) {
-        // Thu gọn filter
         options.classList.remove('visible');
         setTimeout(() => {
             options.style.maxHeight = "0px"; 
         }, 10);
-        icon.classList.remove('rotate'); // Mũi tên quay xuống
+        icon.classList.remove('rotate'); 
     } else {
-        // Mở filter
-        options.style.maxHeight = options.scrollHeight + "px"; // Đặt max-height đúng với nội dung
+        options.style.maxHeight = options.scrollHeight + "px";
         options.classList.add('visible');
-        icon.classList.add('rotate'); // Mũi tên quay lên
+        icon.classList.add('rotate'); 
     }
 }
 
-function updateNavbar() {
+async function updateNavbar() {
     const urlParams = new URLSearchParams(window.location.search);
     const userInfo = urlParams.get('userInfo');
 
@@ -36,7 +34,7 @@ function updateNavbar() {
         localStorage.setItem("email", user.email);
         localStorage.setItem("name", user.name);
         localStorage.setItem("avatar", user.avatar);
-        window.history.replaceState({}, document.title, "/index.html"); // Remove query params from URL
+        window.history.replaceState({}, document.title, "/index.html"); 
     }
 
     const token = localStorage.getItem("token");
@@ -44,15 +42,40 @@ function updateNavbar() {
     const name = localStorage.getItem("name");
     const avatar = localStorage.getItem("avatar");
     const loginBtn = document.getElementById("login-btn");
+    const adminManagerLink = document.querySelector('a[href="manager.html"]'); 
 
     if (email && token) {
         loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
-        loginBtn.href = "#"; // Không cho chuyển trang
+        loginBtn.href = "#"; 
         loginBtn.onclick = logoutUser; // Gán sự kiện đăng xuất
+
+        // Gọi API để kiểm tra quyền
+        try {
+            const response = await fetch("http://localhost:4000/auth/profile", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const data = await response.json();
+            console.log("Thông tin user từ API profile:", data);
+
+            if (response.ok && data.role === "admin") {
+                adminManagerLink.style.display = "block"; 
+            } else {
+                adminManagerLink.style.display = "none"; 
+            }
+        } catch (error) {
+            console.error("Lỗi khi gọi API profile:", error);
+            adminManagerLink.style.display = "none"; 
+        }
     } else {
         loginBtn.innerHTML = `<i class="fa fa-user"></i> <p>Login</p>`;
-        loginBtn.href = "login.html"; // Chuyển về trang đăng nhập
-        loginBtn.onclick = null; // Xóa sự kiện đăng xuất
+        loginBtn.href = "login.html"; 
+        loginBtn.onclick = null; 
+        adminManagerLink.style.display = "none"; // Ẩn nút Admin Manager nếu chưa đăng nhập
     }
 }
 
@@ -64,6 +87,7 @@ function logoutUser() {
     alert("Bạn đã đăng xuất!");
     updateNavbar(); 
 }
+
 // Gọi updateNavbar() ngay khi trang load
 document.addEventListener("DOMContentLoaded", updateNavbar);
 

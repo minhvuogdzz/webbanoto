@@ -14,7 +14,11 @@ const carRoute = require("./Routes/CarRoute");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:4000", // Thay đổi nếu frontend chạy ở domain khác
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"] // Cho phép header Authorization
+}));
 app.use(express.json());
 
 connectDB();
@@ -28,8 +32,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/auth", authRoute);
-app.use(express.static(path.join(__dirname, "../Frontend")));
-app.use(express.static(path.join(__dirname, "../Frontend/javascript")));
+app.use(express.static(path.join(__dirname, "../Frontend"))); // Phục vụ tệp tĩnh từ thư mục Frontend
+app.use(express.static(path.join(__dirname, "../Frontend/javascript"))); // Phục vụ tệp JS
+app.use(express.static(path.join(__dirname, "../Frontend/stylecss"))); // Phục vụ tệp CSS
+app.use(express.static(path.join(__dirname, "../Frontend/image"))); // Phục vụ hình ảnh
 app.use(userRoute);
 app.use(carRoute);
 app.listen(PORT, () => {

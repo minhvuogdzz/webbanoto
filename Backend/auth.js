@@ -56,8 +56,14 @@ function createAuthRouter(db) {
     //Check token return profile    
     router.get("/profile", async (req, res) => {
         try {
-            const token = req.headers.authorization;
-            if (!token) return res.status(401).json({ message: "Không có token!" });
+            const authHeader = req.headers.authorization;
+            const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+
+            if (!token) {
+                console.error("Không tìm thấy token trong Authorization Header!");
+                return res.status(401).json({ message: "Không có token!" });
+            }
+
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             const user = await db.collection("users").findOne({ _id: decoded.userId });
             if (!user) return res.status(404).json({ message: "Không tìm thấy user!" });
