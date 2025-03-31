@@ -191,14 +191,3 @@ async function loadCars(cars) {
     }
 }
 
-document.getElementById("searchInput").addEventListener("input", function(event) {
-    updateNameFilter(event.target.value);
-});
-
-document.addEventListener('DOMContentLoaded', FetchAllCars);
-// Hàm chuyển hướng (sửa lại để truyền ID xe)
-function delayedRedirect(carId) {
-setTimeout(() => {
-    window.location.href = `detailCar.html?id=${carId}`;
-}, 500);
-}
