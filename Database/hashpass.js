@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 
+// Hash mật khẩu
 const password = "admin88"; 
 const saltRounds = 10;
 
