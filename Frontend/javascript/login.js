@@ -71,6 +71,25 @@ document.addEventListener("DOMContentLoaded", function () {
     if (profileButton) {
         profileButton.addEventListener("click", fetchProfile);
     }
+
+    // Xử lý thông tin người dùng Google từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userInfo = urlParams.get("userInfo");
+
+    if (userInfo) {
+        const user = JSON.parse(decodeURIComponent(userInfo));
+        console.log("Thông tin người dùng Google:", user);
+
+        // Lưu token và refresh token vào localStorage
+        localStorage.setItem("token", user.token);
+        localStorage.setItem("refreshToken", user.refreshToken);
+        localStorage.setItem("email", user.email);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem("avatar", user.avatar);
+
+        // Chuyển hướng đến trang chính
+        window.location.href = "index.html";
+    }
 });
 
 function handleCredentialResponse(response) {

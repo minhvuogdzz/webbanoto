@@ -107,12 +107,21 @@ const getProfile = async (req, res) => {
 // Google Login
 const googleCallback = (req, res) => {
     const user = req.user;
+
+    if (!user || !user.token || !user.refreshToken) {
+        console.error("Lỗi: Không thể tạo token cho người dùng Google.");
+        return res.redirect(`/login.html?error=Không thể đăng nhập bằng Google!`);
+    }
+
     const userInfo = {
-        token: req.session.passport.user,
+        token: user.token,
+        refreshToken: user.refreshToken,
         email: user.email,
         name: user.name,
         avatar: user.avatar
     };
+
+    console.log("Thông tin người dùng Google:", userInfo); // Debug user info
     const userInfoString = encodeURIComponent(JSON.stringify(userInfo));
     res.redirect(`/index.html?userInfo=${userInfoString}`);
 };
@@ -120,15 +129,15 @@ const googleCallback = (req, res) => {
 // Refresh Token
 const refreshToken = (req, res) => {
     const { token } = req.body;
-    console.log("Yêu cầu làm mới token:", token); // Debug refresh token request
+    console.log("Yêu cầu làm mới token:", token); 
 
     if (!token) {
-        console.error("Không có Refresh Token!"); // Debug missing token
+        console.error("Không có Refresh Token!"); 
         return res.status(401).json({ message: "Không có Refresh Token!" });
     }
 
     if (!refreshTokens.includes(token)) {
-        console.error("Refresh Token không hợp lệ!"); // Debug invalid token
+        console.error("Refresh Token không hợp lệ!"); 
         return res.status(403).json({ message: "Refresh Token không hợp lệ!" });
     }
 
