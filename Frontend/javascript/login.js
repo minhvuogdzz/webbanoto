@@ -1,20 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("loginForm");
+    // Kiểm tra và xóa token cũ nếu không hợp lệ
+    const token = localStorage.getItem("token");
+    if (!token) {
+        console.log("Không tìm thấy token, xóa dữ liệu đăng nhập cũ.");
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("username");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
+        localStorage.removeItem("avatar");
+    }
 
+    const loginForm = document.getElementById("loginForm");
     if (!loginForm) {
         console.error("Không tìm thấy phần tử #loginForm");
         return;
     }
 
     loginForm.addEventListener("submit", async function (event) {
-        event.preventDefault(); // Ngăn chặn form reload
+        event.preventDefault();
 
         const emailOrUser = document.getElementById("emailOrUser").value.trim();
         const password = document.getElementById("password").value.trim();
 
         console.log("Dữ liệu gửi lên API:", { emailOrUser, password });
 
-        // Phân biệt giữa email và username
         const isEmail = emailOrUser.includes("@");
         const payload = isEmail
             ? { email: emailOrUser, password }
@@ -32,15 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.ok) {
                 alert("Đăng nhập thành công!");
-                console.log("Token nhận được từ server:", data.token); // Debug token
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("username", data.username || ""); 
-                localStorage.setItem("email", data.email || ""); 
-                localStorage.setItem("role", data.role || ""); 
-                setTimeout(() => {
-                    fetchProfile(); // Gọi API lấy profile
-                    window.location.href = "index.html";
-                }, 500);
+                localStorage.setItem("refreshToken", data.refreshToken);
+                localStorage.setItem("username", data.username || "");
+                localStorage.setItem("email", data.email || "");
+                localStorage.setItem("role", data.role || "");
+                localStorage.setItem("avatar", data.avatar || "/image/default-avatar.png"); // Store avatar
+                window.location.href = "index.html";
             } else {
                 alert(data.message || "Đăng nhập thất bại!");
             }
@@ -51,9 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Google login
-    document.getElementById("google-login").addEventListener("click", function () {
-        window.location.href = "http://localhost:4000/auth/google";
-    });
+    const googleLoginButton = document.getElementById("google-login");
+    if (googleLoginButton) {
+        googleLoginButton.addEventListener("click", function () {
+            window.location.href = "http://localhost:4000/auth/google";
+        });
+    }
 
     // Thêm sự kiện để gọi API profile
     const profileButton = document.getElementById("fetchProfileButton");
@@ -71,7 +82,7 @@ function handleCredentialResponse(response) {
     localStorage.setItem("token", response.credential);
     localStorage.setItem("email", data.email);
     localStorage.setItem("name", data.name);
-    localStorage.setItem("avatar", data.picture);
+    localStorage.setItem("avatar", data.picture || "/image/default-avatar.png");
 
     setTimeout(() => {
         window.location.href = "index.html";
@@ -80,8 +91,8 @@ function handleCredentialResponse(response) {
 
 // Example: Fetch profile after login
 async function fetchProfile() {
-    const token = localStorage.getItem("token");
-    console.log("Token được lấy từ localStorage:", token); // Debug token
+    let token = localStorage.getItem("token");
+    console.log("Token được lấy từ localStorage:", token);
 
     if (!token) {
         console.error("Không tìm thấy token trong localStorage!");
@@ -90,20 +101,53 @@ async function fetchProfile() {
     }
 
     try {
-        const response = await fetch("http://localhost:4000/auth/profile", {
+        let response = await fetch("http://localhost:4000/auth/profile", {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`, // Gửi token trong Authorization Header
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         });
 
-        console.log("Phản hồi từ API profile:", response.status); // Debug response status
+        if (response.status === 403) {
+            console.log("Token hết hạn, đang làm mới token...");
+            const refreshToken = localStorage.getItem("refreshToken");
+            const refreshResponse = await fetch("http://localhost:4000/auth/refresh-token", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: refreshToken }),
+            });
+
+            const refreshData = await refreshResponse.json();
+            if (refreshResponse.ok) {
+                token = refreshData.accessToken;
+                localStorage.setItem("token", token);
+                console.log("Token mới:", token);
+
+                // Retry fetching the profile with the new token
+                response = await fetch("http://localhost:4000/auth/profile", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+            } else {
+                alert("Không thể làm mới token, vui lòng đăng nhập lại!");
+                console.error("Lỗi làm mới token:", refreshData.message);
+                return;
+            }
+        }
+
         const data = await response.json();
-        console.log("Dữ liệu nhận được từ API profile:", data); // Debug dữ liệu nhận được
+        console.log("Dữ liệu nhận được từ API profile:", data);
 
         if (response.ok) {
             alert(`Lấy thông tin profile thành công!\nTên: ${data.name}\nEmail: ${data.email}`);
+            const avatarElement = document.getElementById("profileAvatar");
+            if (avatarElement) {
+                avatarElement.src = data.avatar || "/image/default-avatar.png"; // Set avatar or default
+            }
         } else {
             alert(data.message || "Không thể lấy thông tin profile!");
         }

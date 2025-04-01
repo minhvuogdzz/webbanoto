@@ -16,10 +16,12 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:4000/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
     try {
+        console.log("Google Profile:", profile); // Debug Google profile
         const email = profile.emails[0].value;
         let user = await User.findOne({ email });
 
         if (!user) {
+            console.log("Tạo user mới từ Google:", email); // Debug new user creation
             user = {
                 name: profile.displayName,
                 email: email,
@@ -29,8 +31,10 @@ passport.use(new GoogleStrategy({
             await User.insertOne(user);
         }
 
+        console.log("Đăng nhập Google thành công! User:", user); // Debug successful login
         done(null, { token: accessToken, email: user.email, name: user.name, avatar: user.avatar });
     } catch (error) {
+        console.error("Lỗi trong Google Strategy:", error); // Debug error
         done(error, null);
     }
 }));

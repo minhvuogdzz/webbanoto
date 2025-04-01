@@ -1,24 +1,24 @@
 const jwt = require("jsonwebtoken");
 
 exports.authenticateToken = (req, res, next) => {
-    const authHeader = req.header("Authorization");
-    const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+    const authHeader = req.headers.authorization;
+    console.log("Authorization Header:", authHeader); // Debug authorization header
 
-    console.log("Authorization Header:", authHeader); 
-    console.log("Token được trích xuất:", token); 
+    const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+    console.log("Token được trích xuất:", token); // Debug extracted token
 
     if (!token) {
-        console.error("Không tìm thấy token trong Authorization Header!");
-        return res.status(401).json({ message: "Không có token, truy cập bị từ chối!" });
+        console.error("Không có token!"); // Debug missing token
+        return res.status(401).json({ message: "Không có token!" });
     }
 
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("Token đã được giải mã:", decoded); // Debug decoded token
-        req.user = decoded; // Lưu thông tin user vào request để dùng ở các route tiếp theo
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            console.error("Lỗi xác thực token:", err); // Debug token verification error
+            return res.status(403).json({ message: "Token không hợp lệ hoặc đã hết hạn!" });
+        }
+        console.log("Token hợp lệ! User:", user); // Debug valid token
+        req.user = user;
         next();
-    } catch (error) {
-        console.error("Lỗi xác thực token:", error);
-        return res.status(403).json({ message: "Token không hợp lệ!" });
-    }
+    });
 };

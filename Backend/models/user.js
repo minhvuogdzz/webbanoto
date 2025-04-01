@@ -6,8 +6,8 @@ const UserSchema = new mongoose.Schema({
     password: { type: String },
     googleId: { type: String, unique: true, sparse: true },
     name: { type: String },
-    avatar: { type: String },
-    role: { type: String, default: "user" } // Thêm trường role, mặc định là "user"
+    avatar: { type: String, default: "/image/default-avatar.png" }, // Default avatar
+    role: { type: String, default: "user" }
 });
 
 module.exports = mongoose.model("User", UserSchema);

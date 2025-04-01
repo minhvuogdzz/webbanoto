@@ -1,28 +1,41 @@
 .sign-up {
-    background-color: rgba(255, 255, 255, 1.0);
+    background-image: url(./img/SignUp.png);
+    background-size: cover;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
 }
 
-.sign-up .div {
-    background-color: rgba(255, 255, 255, 1.0);
-    background: linear-gradient (180deg, rgb (18, 4, 11) 57.5%, rgb(11, 2, 2) 100%);
-    width: 1440px;
-    height: 1024px;
+/* .aboutus {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+    right: 30px;
+    top: 20px;
     position: relative;
+    z-index: 999;
+    transition: transform 0.2s;
 }
 
-.Sign-up .overlap {
-    position: absolute;
-    width: 1440px;
-    height: 863px;
-    top: 161px;
-    left: 0;
+.aboutus:hover {
+    transform: scale(1.2);
 }
 
-.sign-up .element {
+.aboutus i {
+    font-size: 20px;
+}
+
+.aboutus p {
+    margin: 0;
+    font-size: 16px;
+} */
+
+.element {
     position: absolute;
     width: 1440px;
     height: 1024px;
@@ -111,7 +124,7 @@
 
 .sign-up .button-2:hover {
     background-color: #ffffff;
-    color: #000000 ;
+    color: #000000;
 }
 
 .sign-up .button-3 {
@@ -138,8 +151,8 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.sign-up .button-3:hover{
-    background-color: #3d3d3d ;
+.sign-up .button-3:hover {
+    background-color: #3d3d3d;
     color: #ffffff;
 }
 
@@ -348,7 +361,6 @@
 }
 
 .sign-up .input-field-4 {
-    height: 119px;
     top: 70px;
     left: -357px;
     display: flex;
@@ -408,9 +420,17 @@
 }
 
 @keyframes flickerGlow {
-    0% { filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5)); }
-    50% { filter: drop-shadow(0px 0px 20px rgb(168, 0, 0)); }
-    100% { filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5)); }
+    0% {
+        filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+    }
+
+    50% {
+        filter: drop-shadow(0px 0px 20px rgb(168, 0, 0));
+    }
+
+    100% {
+        filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+    }
 }
 
 .sign-up .logoweb {
@@ -421,7 +441,7 @@
     left: 22px;
     object-fit: cover;
     animation: flickerGlow 1s infinite alternate;
-  }
+}
 
 .sign-up .input-field-7 {
     height: 119px;

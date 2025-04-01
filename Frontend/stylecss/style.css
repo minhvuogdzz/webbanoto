@@ -102,11 +102,12 @@ body{
     align-items: center;
     gap: 5px;
     font-size: 18px;
-    transition: text-shadow 0.3s ease, color 0.3s ease;
+    transition: transform 0.2s;
 }
 
 .nav-links a:hover {
-    color: #c71313;
+    transform: scale(1.1); 
+    color: #c21414;
 }
 
 .avatar {
