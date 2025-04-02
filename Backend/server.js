@@ -19,8 +19,9 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"] // Cho phép header Authorization
 }));
 app.use(express.json());
-
+           
 connectDB();
+
 //Check .env
 app.use(session({
     secret: process.env.SESSION_SECRET,

@@ -118,7 +118,7 @@ const googleCallback = (req, res) => {
         refreshToken: user.refreshToken,
         email: user.email,
         name: user.name,
-        avatar: user.avatar
+        avatar: "/image/default-avatar.png" // Set default avatar
     };
 
     console.log("Thông tin người dùng Google:", userInfo); // Debug user info

@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("refreshToken", user.refreshToken);
         localStorage.setItem("email", user.email);
         localStorage.setItem("name", user.name);
-        localStorage.setItem("avatar", user.avatar);
+        localStorage.setItem("avatar", "/image/default-avatar.png"); // Set default avatar
 
         // Chuyển hướng đến trang chính
         window.location.href = "index.html";

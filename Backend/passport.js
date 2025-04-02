@@ -14,7 +14,7 @@ passport.deserializeUser((token, done) => {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:4000/auth/google/callback"
+    callbackURL: process.env.GOOGLE_REDIRECT_URI
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         console.log("Google Profile:", profile); // Debug Google profile
@@ -26,10 +26,14 @@ passport.use(new GoogleStrategy({
             user = new User({
                 name: profile.displayName,
                 email: email,
-                avatar: profile.photos[0]?.value || "/image/default-avatar.png",
+                avatar: "/image/default-avatar.png", // Set default avatar
                 googleId: profile.id,
                 createdAt: new Date()
             });
+            await user.save();
+        } else if (!user.avatar || user.avatar === "/image/default-avatar.png") {
+            // Cập nhật avatar nếu chưa có hoặc đang dùng avatar mặc định
+            user.avatar = "/image/default-avatar.png"; // Set default avatar
             await user.save();
         }
 

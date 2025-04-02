@@ -45,7 +45,7 @@ async function updateNavbar() {
     const adminManagerLink = document.querySelector('a[href="manager.html"]'); 
 
     if (email && token) {
-        loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
+        loginBtn.innerHTML = `<img src="${avatar || '/image/default-avatar.png'}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
         loginBtn.href = "#"; 
         loginBtn.onclick = logoutUser; // Gán sự kiện đăng xuất
 
