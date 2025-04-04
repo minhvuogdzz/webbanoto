@@ -1,3 +1,15 @@
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    background-image: url(/image/back.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
 .sign-up {
     background-image: url(./img/SignUp.png);
     background-size: cover;
@@ -45,17 +57,20 @@
 }
 
 .sign-up .frame {
-    position: absolute;
-    width: 611px;
-    height: 702px;
-    top: 140px;
-    left: 415px;
+    position: fixed;
+    width: 600px;
+    height: 670px;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     background-color: #22222233;
     border-radius: 58px;
     overflow: hidden;
     border: 2px solid;
     border-color: #9b9a9a;
-}
+    align-items: center;
+    justify-content: center; 
+  }
 
 .sign-up .overlap-group {
     position: relative;

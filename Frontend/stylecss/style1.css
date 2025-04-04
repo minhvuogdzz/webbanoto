@@ -1,8 +1,21 @@
+body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  background-image: url(/image/back.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .sign-in {
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  background-image: url(/image/back.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -78,16 +91,20 @@
 }
 
 .sign-in .frame {
-  position: absolute;
+  position: fixed;
   width: 600px;
   height: 670px;
-  top: 20px;
-  left: 411px;
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%); 
   background-color: #22222233;
   border-radius: 58px;
   overflow: hidden;
   border: 2px solid;
   border-color: #9b9a9a;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
 }
 
 .sign-in .hello-welcome-back {
