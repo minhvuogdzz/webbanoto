@@ -22,6 +22,10 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+        a {
+            text-decoration: none; /* Bỏ gạch chân của link */
+        }
+
         .container-main {
             /* height: 100vh;
             display: grid;
@@ -116,16 +120,64 @@
             color: #560000;
             text-shadow: 0px 0px 3px #ffffff, 0px 0px 5px #ffffff; /* Tạo viền xanh */
         }
-        /* Container */
-        body {
-            color: #fff;
+
+        /* Banner */
+        .banner {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
         }
+        .banner-main {
+            margin-top: 85px;
+        }
+        .banner-main-img {
+            width: 100%;
+            display: block;
+        }
+        .banner-main-btn {
+            background-color: #EEE;
+            height: 150px;
+            display: flex;
+            justify-content: center; /* Căn giữa các phần tử */
+            align-items: center;
+            gap: 50px; /* Khoảng cách giữa các phần tử */
+        }
+
+        .banner-main .banner-main-btn .item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .banner-main .banner-main-btn .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .banner-main .banner-main-btn .icon>img {
+            width: 50px; /* Điều chỉnh kích thước icon */
+            height: auto;
+        }
+
+        .banner-main .banner-main-btn .text {
+            font-size: 16px;
+            padding-left: 10px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        /* Container */
+        /* body {
+            color: #fff;
+        } */
         .container {
+            color: #fff;
             display: flex;
             align-items: center;
             max-width: 1100px;
             margin: 0 auto;
-            padding: 150px 0;
+            padding: 100px 0;
         }
         .image-box {
             position: relative;
@@ -191,6 +243,17 @@
         }
         /* End: container */
 
+        /* Start: description */
+        .description {
+            color: #bdc3c7;
+        }
+        .description>p {
+            text-align: justify;
+            line-height: 1.6;
+            display: block;
+            padding: 0 170px 70px 170px;
+        }
+
         /* Start: img-library */
         .img-library {
             padding: 40px 0;
@@ -201,7 +264,7 @@
         }
         .gallery-container {
             position: relative;
-            max-width: 1024px;
+            max-width: 1120px;
             margin: auto;
         }
         .main-image {
@@ -342,6 +405,37 @@
             </nav>
             
         </div>
+        <div class="banner">
+        <div class="banner-main">
+            <img class="banner-main-img" src="./image/img_banner/banner_vios.png" alt="Banner Image">
+            <div class="banner-main-btn">
+                <a href="">
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./image/img_banner/register-test-car.png" alt="Lái thử">
+                        </div>
+                        <div class="text">Đăng ký lái thử</div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./image/img_banner/du-toan-chi-phi-icon.png" alt="Dự toán chi phí">
+                        </div>
+                        <div class="text">Dự toán chi phí</div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item">
+                        <div class="icon1">
+                            <img src="./image/img_banner/taicatalogue.png" width="35" alt="Catalogue">
+                        </div>
+                        <div class="text">Tải Catalogue</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
         <div class="container">
             <div class="image-box">
                 <img src="./image/011DEA3A01BBE6EFEEB74DCB69E50997.png" alt="Toyota Vios 1.5G-CVT">
@@ -370,6 +464,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="description">
+            <p>Toyota Vios 1.5G-CVT là phiên bản cao cấp nhất trong dòng sedan hạng B của Toyota, nổi bật với thiết kế sang trọng, trang bị tiện nghi và khả năng vận hành vượt trội. Xe sử dụng động cơ 1.5L mạnh mẽ kết hợp với hộp số tự động vô cấp CVT, mang lại trải nghiệm lái êm ái, mượt mà và tiết kiệm nhiên liệu. Về ngoại thất, Vios 1.5G-CVT sở hữu cụm đèn LED hiện đại, gương chiếu hậu chỉnh điện tích hợp báo rẽ và bộ mâm hợp kim 16 inch khỏe khoắn. Nội thất xe được trang bị ghế da cao cấp, vô lăng bọc da tích hợp các nút điều khiển, màn hình giải trí cảm ứng 7 inch hỗ trợ Apple CarPlay/Android Auto và điều hòa tự động. Bên cạnh đó, xe còn được trang bị hệ thống an toàn tiên tiến gồm 7 túi khí, cân bằng điện tử, hỗ trợ khởi hành ngang dốc, cảm biến lùi và camera lùi. Với những trang bị hiện đại và độ bền bỉ đặc trưng của Toyota, Vios 1.5G-CVT là lựa chọn lý tưởng cho người dùng yêu thích sự tiện nghi, an toàn và đẳng cấp.
+            </p>
         </div>
         <div class="img-library">
             <h1 style="margin-bottom: 40px; color: #000; font-size: 36px;">THƯ VIỆN ẢNH</h1>
