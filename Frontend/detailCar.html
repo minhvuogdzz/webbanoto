@@ -25,7 +25,11 @@
         a {
             text-decoration: none; /* Bỏ gạch chân của link */
         }
+        .blur-background {
+            filter: blur(5px); /* Làm mờ nền */
+        }
 
+/* Start: Container-main */
         .container-main {
             /* height: 100vh;
             display: grid;
@@ -34,8 +38,9 @@
                 "header "
                 "container"; */
         }
+/* End: Container-main */
 
-        /* Header */
+/* Start: Header */
         .header {
             position: fixed;
             top: 0;
@@ -66,12 +71,12 @@
             }
         }
 
-        .logo img {
+        .header .logo img {
             height: 100px;
             animation: flickerGlow 1s infinite alternate;
         }
 
-        .search-bar {
+        .header .search-bar {
             display: flex;
             align-items: center;
             background-color: #333;
@@ -79,7 +84,7 @@
             padding: 8px 30px;
         }
 
-        .search-bar input {
+        .header .search-bar input {
             border: #a8a3a3;
             outline: none;
             background: none;
@@ -88,16 +93,16 @@
             width: 300px;
         }
 
-        .search-bar input::placeholder {
+        .header .search-bar input::placeholder {
             color: #aaa;
         }
 
-        .search-bar i {
+        .header .search-bar i {
             color: white;
             cursor: pointer;
         }
 
-        .nav-links {
+        .header .nav-links {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -105,7 +110,7 @@
             font-weight: bold;
         }
 
-        .nav-links a {
+        .header .nav-links a {
             margin: 0 10px;
             color: white;
             text-decoration: none;
@@ -116,12 +121,13 @@
             transition: text-shadow 0.3s ease, color 0.3s ease;
         }
 
-        .nav-links a:hover {
+        .header .nav-links a:hover {
             color: #560000;
             text-shadow: 0px 0px 3px #ffffff, 0px 0px 5px #ffffff; /* Tạo viền xanh */
         }
+/* End: Header */
 
-        /* Banner */
+/* Start: Banner */
         .banner {
             background-color: #fff;
             display: flex;
@@ -166,11 +172,9 @@
             font-weight: bold;
             color: #222;
         }
+/* End: Banner */
 
-        /* Container */
-        /* body {
-            color: #fff;
-        } */
+/* Start: Container */
         .container {
             color: #fff;
             display: flex;
@@ -179,16 +183,16 @@
             margin: 0 auto;
             padding: 100px 0;
         }
-        .image-box {
+        .container .image-box {
             position: relative;
             padding: 10px;
         }
-        .image-box img {
+        .container .image-box img {
             width: 100%;
             max-width: 500px;
             display: block;
         }
-        .image-box .dem {
+        .container .image-box .dem {
             z-index: -1;
             position: absolute;
             left: 0px;
@@ -199,51 +203,51 @@
             display: block;
             background-color: red;
         }
-        .content {
+        .container .content {
             padding-left: 50px;
         }
-        .content h1 {
+        .container .content h1 {
             font-size: 36px;
             font-weight: bold;
         }
-        .content p {
+        .container .content p {
             margin-top: 40px;
             color: #bdc3c7;
         }
-        .links {
+        .container .links {
             margin-top: 40px;
             display: flex;
         }
-        .links a {
+        .container .links a {
             font-size: 15px;
             text-decoration: none;
             color: #e74c3c;
             margin-right: 15px;
         }
-        .info {
+        .container .info {
             flex-wrap: wrap;
             max-width: 500px;
         }
-        .info .info-group-one, .info-group-two {
+        .container .info .info-group-one, .info-group-two {
             display: flex;
             margin-top: 42px;
         }
-        .info .info-group-one>div, .info-group-two>div {
+        .container .info .info-group-one>div, .info-group-two>div {
             /* margin-right: 30px; */
             text-align: center;
         }
-        .info div span {
+        .container .info div span {
             display: block;
             margin-bottom: 32px;
         }
-        .price {
+        .container .price {
             font-size: 20px;
             font-weight: bold;
             color: black;
         }
-        /* End: container */
+/* End: container */
 
-        /* Start: description */
+/* Start: description */
         .description {
             color: #bdc3c7;
         }
@@ -253,8 +257,9 @@
             display: block;
             padding: 0 170px 70px 170px;
         }
+/* End: description */
 
-        /* Start: img-library */
+/* Start: img-library */
         .img-library {
             padding: 40px 0;
             background-color: #fff;
@@ -283,9 +288,6 @@
             opacity: 0;
             transform: translateX(-100%);
         }
-        /* .fade-out {
-            opacity: 0;
-        } */
 
         .thumbnails {
             display: flex;
@@ -318,8 +320,9 @@
         }
         .arrow-left { left: 10px; }
         .arrow-right { right: 10px; }
+/* End: img-library */
         
-        /* footer */
+/* Start: footer */
         .footer {
             padding: 50px 20px;
             text-align: center;
@@ -374,7 +377,106 @@
             border-radius: 50%;
             margin-right: 5px;
         }
+/* End: footer */
 
+/* Start: form-dangkylaithu */
+        .form-dangkylaithu {
+            display: none; /* Ẩn form khi chưa nhấn vào "đây" */
+            position: fixed; /* Đặt vị trí form ở mọi nơi */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center; /* Căn lề với cả các phần tử */
+        }
+
+        .form-dangkylaithu .form-container {
+            background: #fff;
+            background-color: #EEE;
+            padding: 46px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            width: 460px;
+            position: relative;
+        }
+        .form-dangkylaithu .form-group {
+            margin-bottom: 15px;
+        }
+        .form-dangkylaithu .form-group label {
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .form-dangkylaithu .form-group input,
+        .form-dangkylaithu .form-group select {
+            background-color: #EEE;
+            width: 100%;
+            padding-top: 15px;
+            font-size: 15px;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+        }
+        .form-dangkylaithu .form-group input:focus,
+        .form-dangkylaithu .form-group select:focus {
+            border-bottom: 1px solid #007BFF;
+        }
+        .form-dangkylaithu .checkbox-group {
+            margin-bottom: 15px;
+        }
+        .form-dangkylaithu .checkbox-group input {
+            margin-right: 8px;
+        }
+        .form-dangkylaithu .close-btn {
+            position: absolute;
+            top: 10px;
+            border-radius: 50%;
+            border: none;
+            background: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #f44336;
+        }
+        .form-dangkylaithu .close-btn:hover {
+            color: #d32f2f;
+        }
+        .form-dangkylaithu .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #f44336; /* Đổi thành màu đỏ */
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            opacity: 0.5;  /* Nút mặc định bị làm mờ và không bấm được */
+            pointer-events: none; /* Không thể nhấn */
+        }
+        .form-dangkylaithu .submit-btn.enabled {
+            opacity: 1; /* Kích hoạt nút: Xóa hiệu ứng làm mờ */
+            pointer-events: auto; /* Cho phép nhấn */
+        }
+
+
+        .form-dangkylaithu .form-img {
+            background-color: #EEE;
+            padding: 20px;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            width: 390px;
+            /* position: relative; */
+        }
+
+        .form-dangkylaithu .form-img>img {
+            margin: 26px 0;
+            width: 350px;
+            height: 582px;
+            border-radius: 8px;
+        }
+/* End: form-dangkylaithu */
     </style>
 </head>
 <body>
@@ -409,7 +511,7 @@
         <div class="banner-main">
             <img class="banner-main-img" src="./image/img_banner/banner_vios.png" alt="Banner Image">
             <div class="banner-main-btn">
-                <a href="">
+                <a id="openFormDangKy">
                     <div class="item">
                         <div class="icon">
                             <img src="./image/img_banner/register-test-car.png" alt="Lái thử">
@@ -417,15 +519,15 @@
                         <div class="text">Đăng ký lái thử</div>
                     </div>
                 </a>
-                <a href="">
+                <a id="openFormDatLich">
                     <div class="item">
                         <div class="icon">
-                            <img src="./image/img_banner/du-toan-chi-phi-icon.png" alt="Dự toán chi phí">
+                            <img src="./image/img_banner/du-toan-chi-phi-icon.png" alt="Đặt lịch">
                         </div>
-                        <div class="text">Dự toán chi phí</div>
+                        <div class="text">Đặt lịch</div>
                     </div>
                 </a>
-                <a href="">
+                <a href="./document/Vios.pdf">
                     <div class="item">
                         <div class="icon1">
                             <img src="./image/img_banner/taicatalogue.png" width="35" alt="Catalogue">
@@ -497,6 +599,62 @@
             <p class="copyright">Developed by <a href="">Founder Minh Vuong Duong & Co-Founder Hai Luu Cong</a></p>
         </div>
     </div>
+    <div class="form-dangkylaithu">
+        <div class="form-container">
+            <button class="close-btn" id="closeForm">X</button>
+            <h1>ĐĂNG KÝ LÁI THỬ</h1>
+            <div class="form-group">
+                <label for="fullname">Họ và tên *</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Lưu Công A">
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại *</label>
+                <input type="text" id="phone" name="phone" placeholder="Vd: 0369017983">
+            </div>
+            <div class="form-group">
+                <label for="city">Tỉnh/Thành phố *</label>
+                <select id="city" name="city">
+                    <option value="">Chọn tỉnh/thành phố</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dealer">Đại lý *</label>
+                <select id="dealer" name="dealer">
+                    <option value="">Chọn đại lý</option>
+                    <option value="CS1">Anh Huy Auto (CS1)</option>
+                    <option value="CS2">Anh Huy Auto (CS2)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Ngày dự kiến</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" class="checkbox" name="license">
+                    Tôi đã có Giấy Phép Lái Xe hợp lệ
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" class="checkbox" name="info">
+                    Tôi xác nhận rằng các đại lý Toyota có thể gửi cho tôi thêm thông tin.
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" class="checkbox" name="terms">
+                    Tôi đã đọc và đồng ý với các quy định và chính sách của Toyota Việt Nam.
+                </label>
+            </div>
+            <button class="submit-btn" id="submitButton">ĐĂNG KÝ LÁI THỬ</button>
+            </div>
+            <div class="form-img">
+                <img src="./document/volang.jpg" alt="Vô lăng">
+            </div>
+    </div>
     <!-- JS cho phần thư viện ảnh -->
     <script>
         const images = ["./image/img_library/img_library_vios/anh1.png", "./image/img_library/img_library_vios/anh2.png", "./image/img_library/img_library_vios/anh3.png", "./image/img_library/img_library_vios/anh4.png", "./image/img_library/img_library_vios/anh5.png", "./image/img_library/img_library_vios/anh6.png"];
@@ -534,21 +692,107 @@
             });
         }
 
-        // function updateGallery() {
-        //     document.getElementById("mainImage").src = images[currentIndex];
-        //     let mainImage = document.getElementById("mainImage");
-        //     mainImage.classList.add("fade-out");
+    </script>
 
-        //     setTimeout(() => {
-        //     mainImage.src = images[currentIndex];
-        //     mainImage.classList.remove("fade-out");
-        //     }, 300); // Chờ 300ms để ảnh cũ mờ dần trước khi đổi ảnh mới
+    <!-- JS cho phần đăng ký lái thử -->
+    <script>
+        const openFormDangKy = document.getElementById('openFormDangKy'); // Lấy phần tử #openFormDangKy
+        const formDangKy = document.querySelector('.form-dangkylaithu'); // Lấy phần tử với class .form-dangkylaithu
+        const mainContent = document.querySelector('.container-main'); // Lấy nội dung trang chính
+        const closeForm = document.getElementById('closeForm'); // Lấy phần tử #closeForm
+        const checkboxes = document.querySelectorAll('.checkbox'); // Lấy tất cả checkbox
+        const checkboxGroups = document.querySelectorAll('.checkbox-group'); // Lấy tất cả checkbox-group
+        const submitButton = document.getElementById('submitButton'); // Lấy nút Đăng ký
+        const openFormDatLich = document.getElementById('openFormDatLich');  // Button "Đặt lịch xem xe"
+        const formTitle = document.querySelector('.form-container h1');      // Tiêu đề trong form
 
-        //     let thumbnails = document.querySelectorAll(".thumbnail");
-        //     thumbnails.forEach((thumb, index) => {
-        //     thumb.classList.toggle("active", index === currentIndex);
-        //     });
-        // }
+
+        openFormDangKy.addEventListener('click', () => {
+            formDangKy.style.display = 'flex'; // Hiển thị formDangKy bằng cách đặt display là 'flex'
+            mainContent.classList.add('blur-background'); // Làm mờ nền
+            formTitle.textContent = 'ĐĂNG KÝ LÁI THỬ'; // Tiêu đề cho "Đăng ký lái thử"
+            submitButton.textContent = 'ĐĂNG KÝ LÁI THỬ'; // Đổi nội dung nút
+            submitButton.style.backgroundColor = '#f44336'; // Màu đỏ
+            checkboxGroups.forEach(group => group.style.display = 'block'); // Hiển thị cả label và checkbox
+
+            // Thêm border-radius cho cả bên trái của form-img
+            const formImg = document.querySelector('.form-img');
+            formImg.style.borderTopLeftRadius = '0px';
+            formImg.style.borderBottomLeftRadius = '0px';
+
+            // Thay đổi ảnh trong form-img
+            const formImgElement = formImg.querySelector('img');
+            formImgElement.src = './document/volang.jpg'; // Đường dẫn đến ảnh mới
+            formImgElement.alt = 'Đặt lịch'; // Thay đổi thuộc tính alt nếu cần            
+        });
+        openFormDatLich.addEventListener('click', () => {
+            formDangKy.style.display = 'flex'; // Hiển thị form
+            mainContent.classList.add('blur-background'); // Làm mờ nền
+            formTitle.textContent = 'ĐẶT LỊCH XEM XE'; // Tiêu đề cho "Đặt lịch xem xe"
+            submitButton.textContent = 'ĐẶT LỊCH'; // Đổi nội dung nút
+            submitButton.style.backgroundColor = '#007BFF'; // Màu xanh
+            checkboxGroups.forEach(group => group.style.display = 'none'); // Ẩn cả label và checkbox
+
+            // Thêm border-radius cho cả bên trái của form-img
+            const formImg = document.querySelector('.form-img');
+            formImg.style.borderTopLeftRadius = '8px';
+            formImg.style.borderBottomLeftRadius = '8px';
+
+            // Thay đổi ảnh trong form-img
+            const formImgElement = formImg.querySelector('img');
+            formImgElement.src = './document/datlich.jpg'; // Đường dẫn đến ảnh mới
+            formImgElement.alt = 'Đặt lịch'; // Thay đổi thuộc tính alt nếu cần
+
+            
+        });
+
+        closeForm.addEventListener('click', () => {
+            formDangKy.style.display = 'none'; // Ẩn formDangKy
+            mainContent.classList.remove('blur-background'); // Xóa hiệu ứng mờ
+        });
+        formDangKy.addEventListener('click', (event) => {
+             if (event.target === formDangKy) { // Kiểm tra xem người dùng có click vào vùng nền mờ không
+                formDangKy.style.display = 'none'; // Ẩn formDangKy
+                mainContent.classList.remove('blur-background'); // Xóa hiệu ứng mờ
+            }
+        });
+        checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked); // Kiểm tra nếu tất cả checkbox được chọn
+            if (allChecked) {
+                submitButton.classList.add('enabled'); // Kích hoạt nút
+            } else {
+                submitButton.classList.remove('enabled'); // Vô hiệu hóa nút
+            }
+        });
+        });
+        // Hàm kiểm tra xem tất cả các trường đã được điền đầy đủ chưa
+        function validateForm() {
+            const fullname = document.getElementById('fullname').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const city = document.getElementById('city').value;
+            const dealer = document.getElementById('dealer').value;
+            const date = document.getElementById('date').value;
+
+            // Kiểm tra nếu tất cả các trường đều không rỗng
+            if (fullname && phone && city && dealer && date) {
+                submitButton.classList.add('enabled'); // Kích hoạt nút
+                submitButton.style.pointerEvents = 'auto'; // Cho phép nhấn
+                submitButton.style.opacity = '1'; // Xóa hiệu ứng làm mờ
+            } else {
+                submitButton.classList.remove('enabled'); // Vô hiệu hóa nút
+                submitButton.style.pointerEvents = 'none'; // Không cho phép nhấn
+                submitButton.style.opacity = '0.5'; // Làm mờ nút
+            }
+        }
+
+        // Gắn sự kiện 'input' hoặc 'change' cho các trường trong form
+        document.getElementById('fullname').addEventListener('input', validateForm);
+        document.getElementById('phone').addEventListener('input', validateForm);
+        document.getElementById('city').addEventListener('change', validateForm);
+        document.getElementById('dealer').addEventListener('change', validateForm);
+        document.getElementById('date').addEventListener('change', validateForm);
+
     </script>
 </body>
 </html>
