@@ -187,8 +187,8 @@ async function loadCars(cars) {
         // Duyệt qua từng xe và tạo HTML
         cars.forEach(car => {
             const carHTML = `
-                <div class="article" onclick="delayedRedirect(${car.id})">
-                            <div class="article-car">
+                <div class="article">
+                            <div class="article-car" onclick="delayedRedirect(${car.id})">
                                 <div class="article-car-item act-1">
                                 <div>${car.Fuel || 'Động cơ Xăng'}</div>
                             </div>
