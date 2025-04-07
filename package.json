@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/minhvuogdzz/webbanoto/issues"
   },
-  "homepage": "https://github.com/minhvuogdzz/webbanoto#readme"
+  "homepage": "https://github.com/minhvuogdzz/webbanoto#readme",
+  "devDependencies": {
+    "kill-port": "^2.0.1"
+  }
 }
