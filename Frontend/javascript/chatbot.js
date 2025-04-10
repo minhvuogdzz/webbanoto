@@ -199,7 +199,11 @@ const createMessageElement = (content, classes) => {
     return div; 
 }
 
+let isProcessingMessage = false;
+
 const handleOutgoingMessage = (e) => {
+
+    if (isProcessingMessage) return; 
     e.preventDefault();
     userData.message = messageInput.value.trim().toLowerCase();
 
@@ -213,14 +217,42 @@ const handleOutgoingMessage = (e) => {
     setTimeout(() => handleIncomingMessage(userData.message), 1000); 
 }
 
+// const handleOutgoingMessage = (e) => {
+//     if (isProcessingMessage) return; // Ngăn gửi nhiều lần
+//     e.preventDefault();
+
+//     userData.message = messageInput.value.trim().toLowerCase();
+//     if (!userData.message) return;
+
+//     const messageContent = `<div class="message-text">${userData.message}</div>`;
+//     const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
+//     chatBody.appendChild(outgoingMessageDiv);
+//     messageInput.value = '';
+
+//     isProcessingMessage = true; 
+//     setTimeout(() => {
+//         handleIncomingMessage(userData.message);
+//     }, 1000); 
+// }
+
+
 const handleIncomingMessage = (userMessage) => {
-    let botMessageContent = "Sorry, I don't understand that.";
+    let botMessageContent = "Xin lỗi, tôi không hiểu câu hỏi của bạn.";
+
+    // Normalize user message to avoid repetitive responses
+    const normalizedMessage = userMessage.toLowerCase().trim();
 
     for (const [key, value] of Object.entries(botResponses)) {
-        if (userMessage.includes(key)) {
+        if (normalizedMessage.includes(key)) {
             botMessageContent = `<div class="message-text">${value}</div>`;
             break;
         }
+    }
+
+    // Prevent duplicate bot responses for the same user message
+    const lastBotMessage = chatBody.querySelector('.bot-message:last-child .message-text');
+    if (lastBotMessage && lastBotMessage.innerHTML === botMessageContent) {
+        return; // Skip if the last bot response is identical
     }
 
     const incomingMessageDiv = createMessageElement(botMessageContent, "bot-message");
@@ -235,6 +267,5 @@ messageInput.addEventListener('keydown', (e) => {
         handleOutgoingMessage(e);
     }
 });
-
 
 sendMessageButton.addEventListener('click', (e) => handleOutgoingMessage(e));
