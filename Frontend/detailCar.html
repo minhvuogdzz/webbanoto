@@ -128,51 +128,62 @@
 /* End: Header */
 
 /* Start: Banner */
-        .banner {
-            background-color: #fff;
-            display: flex;
-            justify-content: center;
-        }
-        .banner-main {
-            margin-top: 85px;
-        }
-        .banner-main-img {
-            width: 100%;
-            display: block;
-        }
-        .banner-main-btn {
-            background-color: #EEE;
-            height: 150px;
-            display: flex;
-            justify-content: center; /* Căn giữa các phần tử */
-            align-items: center;
-            gap: 50px; /* Khoảng cách giữa các phần tử */
-        }
+.banner {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden; /* Đảm bảo ảnh không bị tràn ra ngoài */
+}
 
-        .banner-main .banner-main-btn .item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
+.banner-main {
+    width: 100%;
+    margin-top: 85px;
+    position: relative;
+}
 
-        .banner-main .banner-main-btn .icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
+.banner-main-img {
+    position: relative;
+    width: 100%;  
+    height: auto;
+    object-fit: cover;  
+}
 
-        .banner-main .banner-main-btn .icon>img {
-            width: 50px; /* Điều chỉnh kích thước icon */
-            height: auto;
-        }
+.banner-main-btn {
+    background-color: #EEE;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
 
-        .banner-main .banner-main-btn .text {
-            font-size: 16px;
-            padding-left: 10px;
-            font-weight: bold;
-            color: #222;
-        }
+/* Các phần tử bên trong banner */
+.banner-main .banner-main-btn .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.banner-main .banner-main-btn .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.banner-main .banner-main-btn .icon>img {
+    width: 50px;
+    height: auto;
+}
+
+.banner-main .banner-main-btn .text {
+    font-size: 16px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #222;
+}
 /* End: Banner */
+
 
 /* Start: Container */
         .container {
@@ -542,7 +553,7 @@
                 <div class="dem"></div>
             </div>
             <div class="content">
-                <h1>VIOS 1.5G-CVT</h1>
+                <h1 id="carName">Tên xe</h1>
                 <p>Bứt phá an toàn Mở ngàn trải nghiệm</p>
                 <div class="links" >
                     <div style="border-right: 1px solid #fff;">
@@ -688,12 +699,13 @@
                 // Tìm xe và kiểm tra tồn tại
                 const car = allCars.find(item => String(item.id) === String(carId));           
                 // Cập nhật DOM
+                document.getElementById('carName').textContent = car.name;
                 document.getElementById('carBanner').src = bannerPath;
                 document.getElementById('carMainImage').src = mainImagepath;
                 document.getElementById('carSeats').textContent = car.seats;
                 document.getElementById('carType').textContent = car.Type;
                 document.getElementById('carFuel').textContent = car.Fuel;
-                document.getElementById('carPrice').textContent = car.Price;
+                document.getElementById('carPrice').textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(car.Price);
             } catch (error) {
                 console.error('Error loading car details:', error);
                 // Xử lý lỗi phù hợp (ví dụ: hiển thị thông báo cho người dùng)
