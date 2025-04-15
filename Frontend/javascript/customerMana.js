@@ -1,30 +1,6 @@
 // Mảng lưu trữ khách hàng
 let customers = [];
 
-// Hàm gửi yêu cầu tạo khách hàng tới backend
-async function createCustomerOnServer(customerData) {
-    try {
-        // Ensure the URL matches the route defined in CustomerRoute.js
-        const response = await fetch("http://localhost:4000/create", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(customerData),
-        });
-
-        if (!response.ok) {
-            throw new Error("Không thể tạo khách hàng trên server.");
-        }
-
-        const data = await response.json();
-        console.log("Khách hàng đã được tạo:", data);
-    } catch (error) {
-        console.error("Lỗi khi tạo khách hàng:", error);
-        alert("Đã xảy ra lỗi khi tạo khách hàng. Vui lòng thử lại.");
-    }
-}
-
 // Hàm lấy danh sách khách hàng từ backend
 async function fetchCustomersFromServer() {
     try {
@@ -63,7 +39,7 @@ function addCustomer() {
         };
 
         // Gửi yêu cầu tạo khách hàng tới server
-        fetch('http://localhost:4000/api/customer/create', {
+        fetch('http://localhost:4000/customer/create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
