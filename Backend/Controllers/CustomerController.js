@@ -3,16 +3,16 @@ const Customer = require("../models/customer");
 // Tạo mới customer
 const createCustomer = async (req, res) => {
   try {
-    const { name, email, phoneNumber } = req.body;
+    const { name, email, phone } = req.body;
 
     // Kiểm tra email đã tồn tại
     const emailExist = await Customer.findOne({ email });
-    const phoneExist = await Customer.findOne({ phoneNumber });
+    const phoneExist = await Customer.findOne({ phone });
     if (emailExist || phoneExist) {
       return res.status(400).json({ message: "Khách hàng đã tồn tại!" });
     }
 
-    const newCustomer = new Customer({ name, email, phoneNumber });
+    const newCustomer = new Customer({ name, email, phone });
     await newCustomer.save();
 
     res.status(201).json(newCustomer);
@@ -46,11 +46,11 @@ const deleteCustomer = async (req, res) => {
 const updateCustomer = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, phoneNumber } = req.body;
+    const { name, email, phone } = req.body;
 
     const updatedCustomer = await Customer.findByIdAndUpdate(
       id,
-      { name, email, phoneNumber },
+      { name, email, phone },
       { new: true }
     );
 
