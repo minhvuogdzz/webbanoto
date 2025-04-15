@@ -3,20 +3,16 @@ const Customer = require("../models/customer");
 // Tạo mới customer
 const createCustomer = async (req, res) => {
   try {
-    const { name, email, phoneNumber } = req.body;
+    const { name, email, phone } = req.body;
 
     const emailExist = await Customer.findOne({ email });
-    const phoneExist = await Customer.findOne({ phoneNumber });
+    const phoneExist = await Customer.findOne({ phone });
     if (emailExist || phoneExist) {
       return res.status(400).json({ message: "Khách hàng đã tồn tại!" });
     }
 
     // Tạo khách hàng mới với các giá trị từ UI
-    const newCustomer = new Customer({
-      name: req.body.name,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber
-    });
+    const newCustomer = new Customer({ name, email, phone });
 
     await newCustomer.save();
 
