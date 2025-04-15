@@ -50,20 +50,20 @@ function addCustomer() {
     // Lấy thông tin từ các input
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    const phoneNumber = document.getElementById('phone').value;
     // const status = document.getElementById('status').value;
 
     // Kiểm tra nếu tất cả các trường không trống
-    if (name && email && phone) {
+    if (name && email && phoneNumber) {
         // Gói dữ liệu vào customerData
         const customerData = {
             name,
             email,
-            phone
+            phoneNumber
         };
 
         // Gửi yêu cầu tạo khách hàng tới server
-        fetch('http://localhost:4000/create', {
+        fetch('http://localhost:4000/api/customer/create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -78,16 +78,8 @@ function addCustomer() {
             console.error('Error:', error);
           });
 
-        // Tạo đối tượng khách hàng để hiển thị trong bảng
-        const customer = {
-            name,
-            email,
-            phone,
-            // status
-        };
-
         // Thêm khách hàng vào mảng
-        customers.push(customer);
+        customers.push(customerData);
 
         // Gọi hàm cập nhật bảng
         updateTable();

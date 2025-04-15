@@ -3,20 +3,29 @@ const Customer = require("../models/customer");
 // Tạo mới customer
 const createCustomer = async (req, res) => {
   try {
-    const { name, email, phone } = req.body;
+    const { name, email, phoneNumber } = req.body;
 
-    const emailExist = await Customer.findOne({ email });
-    const phoneExist = await Customer.findOne({ phone });
-    if (emailExist || phoneExist) {
-      return res.status(400).json({ message: "Khách hàng đã tồn tại!" });
+    // Kiểm tra nếu collection rỗng thì tạo luôn, không cần check tồn tại
+    const customerCount = await Customer.countDocuments();
+
+    if (customerCount > 0) {
+      const emailExist = await Customer.findOne({ email });
+      const phoneExist = await Customer.findOne({ phoneNumber });
+
+      if (emailExist || phoneExist) {
+        return res.status(400).json({ message: "Khách hàng đã tồn tại!" });
+      }
     }
 
-    const newCustomer = new Customer({ name, email, phone});
+    const newCustomer = new Customer({ name, email, phoneNumber });
     await newCustomer.save();
-
-    res.status(201).json(newCustomer);
+    return res.status(201).json(newCustomer);
   } catch (error) {
-    res.status(500).json({ message: "Lỗi khi tạo khách hàng", error });
+    console.error("❌ Lỗi khi tạo khách hàng:", error);
+
+    if (!res.headersSent) {
+      return res.status(500).json({ message: "Lỗi khi tạo khách hàng", error });
+    }
   }
 };
 
