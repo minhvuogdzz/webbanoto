@@ -9,7 +9,8 @@ const connectDB = require("./database");
 const userRoute = require("./Routes/UserRoute");
 const authRoute = require("./Routes/AuthRoute");
 const carRoute = require("./Routes/CarRoute");
-const customerRoute = require("./Routes/CustomerRoute");
+const cusRoute = require("./Routes/CustomerRoute");
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -31,14 +32,14 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/auth", authRoute);
 app.use(express.static(path.join(__dirname, "../Frontend"))); 
 app.use(express.static(path.join(__dirname, "../Frontend/javascript"))); 
 app.use(express.static(path.join(__dirname, "../Frontend/stylecss"))); 
 app.use(express.static(path.join(__dirname, "../Frontend/image")));
-app.use(userRoute);
-app.use(carRoute);
-app.use(customerRoute);
+app.use("/auth", authRoute);
+app.use("/api", userRoute);
+app.use("/api", carRoute);
+app.use("/api", cusRoute);
 app.listen(PORT, () => {
     console.log(`*Server is running at: http://localhost:${PORT}`);
 });

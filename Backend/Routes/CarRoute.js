@@ -3,7 +3,7 @@ const carController = require("../Controllers/CarController");
 
 const router = express.Router();
 
-router.get("/api/cars", carController.getAllCars);
-router.get("/api/cars/filterByPrice", carController.filterCarsByPrice);
+router.get("/cars", carController.getAllCars);
+router.get("/cars/filterByPrice", carController.filterCarsByPrice);
 
 module.exports = router;

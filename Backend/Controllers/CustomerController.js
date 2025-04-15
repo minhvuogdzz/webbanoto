@@ -5,14 +5,13 @@ const createCustomer = async (req, res) => {
   try {
     const { name, email, phone } = req.body;
 
-    // Kiểm tra email đã tồn tại
     const emailExist = await Customer.findOne({ email });
     const phoneExist = await Customer.findOne({ phone });
     if (emailExist || phoneExist) {
       return res.status(400).json({ message: "Khách hàng đã tồn tại!" });
     }
 
-    const newCustomer = new Customer({ name, email, phone });
+    const newCustomer = new Customer({ name, email, phone});
     await newCustomer.save();
 
     res.status(201).json(newCustomer);
