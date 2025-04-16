@@ -175,3 +175,5 @@ function deleteCustomer(index) {
         updateTable();
     }
 }
+
+console.log(customers);
