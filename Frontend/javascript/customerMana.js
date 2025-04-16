@@ -18,7 +18,16 @@ async function fetchCustomersFromServer() {
   }  
 
 // Gọi hàm fetchCustomersFromServer khi trang được tải
-document.addEventListener("DOMContentLoaded", fetchCustomersFromServer);
+document.addEventListener("DOMContentLoaded", () => {
+    const interval = setInterval(() => {
+      const tableBody = document.getElementById("customer-table");
+      if (tableBody) {
+        clearInterval(interval); // Đã tìm thấy, dừng loop
+        fetchCustomersFromServer(); // Gọi hàm ở đây
+      }
+    }, 100); // Kiểm tra mỗi 100ms
+  });
+  
 
 // Hàm thêm khách hàng vào bảng
 function addCustomer() {
@@ -68,7 +77,11 @@ function addCustomer() {
 function updateTable() {
     const tableBody = document.getElementById('customer-table');
     //   ======= LỖI =========
-    tableBody.innerHTML = '';    
+    try {
+        tableBody.innerHTML = '';    
+    } catch (error) {
+        alert(error)
+    }
 
     // Duyệt qua mảng khách hàng để tạo các dòng trong bảng
     customers.forEach((customer, index) => {
