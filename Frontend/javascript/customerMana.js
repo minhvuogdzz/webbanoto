@@ -123,6 +123,7 @@ function editCustomer(index) {
     addButton.onclick = function () {
         updateCustomer(index);
     };
+    window.scrollTo(0, 0);   
 }
 
 // Hàm cập nhật thông tin khách hàng sau khi sửa
