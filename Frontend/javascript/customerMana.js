@@ -27,7 +27,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 100); // Kiểm tra mỗi 100ms
 });
-
+function waitForInitHtml()
+{
+    const interval = setInterval(() => {
+        const tableBody = document.getElementById("customer-table");
+        if (tableBody) {
+            clearInterval(interval); // Đã tìm thấy, dừng loop
+            updateTable(); // Gọi hàm ở đây
+        }
+    }, 100); // Kiểm tra mỗi 100ms
+}
 
 // Hàm thêm khách hàng vào bảng
 function addCustomer() {
