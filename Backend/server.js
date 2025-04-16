@@ -10,6 +10,7 @@ const userRoute = require("./Routes/UserRoute");
 const authRoute = require("./Routes/AuthRoute");
 const carRoute = require("./Routes/CarRoute");
 const cusRoute = require("./Routes/CustomerRoute");
+const orderRoute = require("./Routes/OrderRoute");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -40,6 +41,7 @@ app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/api", carRoute);
 app.use("/customer", cusRoute);
+// app.use("/order", orderRoute);
 app.listen(PORT, () => {
     console.log(`*Server is running at: http://localhost:${PORT}`);
 });
