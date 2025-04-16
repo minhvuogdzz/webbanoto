@@ -121,26 +121,62 @@ function editCustomer(index) {
 }
 
 // Hàm cập nhật thông tin khách hàng sau khi sửa
-function updateCustomer(index) {
+async function updateCustomer(index) {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    // const status = document.getElementById('status').value;
+    const phoneNumber = document.getElementById('phone').value;
+    
+    // Kiểm tra dữ liệu nhập vào
+    if (!name || !email || !phoneNumber) {
+        alert("Vui lòng điền đầy đủ thông tin!");
+        return;
+    }
 
-    customers[index] = { name, email, phone, /* status */ };
+    // Tạo đối tượng customer mới để gửi lên backend
+    const updatedCustomer = {
+        name,
+        email,
+        phoneNumber
+    };
 
-    // Cập nhật lại bảng
-    updateTable();
+    const customer = customers[index];
 
-    // Đổi lại nút Thêm
-    const addButton = document.querySelector('.btn-primary');
-    addButton.textContent = 'Thêm khách hàng';
-    addButton.onclick = addCustomer;
+    try {
+        // Gửi yêu cầu PUT lên server để cập nhật khách hàng
+        const response = await fetch(`http://localhost:4000/customer/${customer._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCustomer),
+        });
 
-    // Xóa giá trị các input sau khi cập nhật
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phone').value = '';
+        if (!response.ok) {
+            throw new Error("Cập nhật khách hàng thất bại");
+        }
+
+        // Cập nhật lại dữ liệu trong mảng customers
+        customers[index] = { ...customer, ...updatedCustomer };
+
+        alert("Cập nhật thành công!");
+
+        // Cập nhật lại bảng
+        updateTable();
+
+        // Đổi lại nút thành "Thêm khách hàng" sau khi cập nhật
+        const addButton = document.querySelector('.btn-primary');
+        addButton.textContent = 'Thêm khách hàng';
+        addButton.onclick = function () {
+            addCustomer();
+        };
+
+        // Xóa thông tin trong form sau khi cập nhật
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+    } catch (error) {
+        alert("Đã xảy ra lỗi khi cập nhật khách hàng.");
+    }
 }
 
 // Hàm xóa khách hàng

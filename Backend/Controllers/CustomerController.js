@@ -54,15 +54,21 @@ const deleteCustomer = async (req, res) => {
 const updateCustomer = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, phone } = req.body;
+    const { name, email, phoneNumber } = req.body;
+
+    // Kiểm tra nếu khách hàng có tồn tại
+    const customer = await Customer.findById(id);
+    if (!customer) {
+      return res.status(404).json({ message: "Khách hàng không tồn tại." });
+    }
 
     const updatedCustomer = await Customer.findByIdAndUpdate(
       id,
-      { name, email, phone },
+      { name, email, phoneNumber },
       { new: true }
     );
 
-    res.status(200).json(updatedCustomer);
+    res.status(200).json({ message: "Cập nhật khách hàng thành công", customer: updatedCustomer });
   } catch (error) {
     res.status(500).json({ message: "Lỗi khi cập nhật khách hàng", error });
   }
