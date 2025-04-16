@@ -1,46 +1,21 @@
 // Mảng lưu trữ khách hàng
 let customers = [];
 
-// Hàm gửi yêu cầu tạo khách hàng tới backend
-async function createCustomerOnServer(customerData) {
-    try {
-        // Ensure the URL matches the route defined in CustomerRoute.js
-        const response = await fetch("http://localhost:4000/create", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(customerData),
-        });
-
-        if (!response.ok) {
-            throw new Error("Không thể tạo khách hàng trên server.");
-        }
-
-        const data = await response.json();
-        console.log("Khách hàng đã được tạo:", data);
-    } catch (error) {
-        console.error("Lỗi khi tạo khách hàng:", error);
-        alert("Đã xảy ra lỗi khi tạo khách hàng. Vui lòng thử lại.");
-    }
-}
-
 // Hàm lấy danh sách khách hàng từ backend
 async function fetchCustomersFromServer() {
     try {
-        const response = await fetch("/"); // Ensure this matches the route in CustomerRoute.js
-        if (!response.ok) {
-            throw new Error("Không thể lấy danh sách khách hàng từ server.");
-        }
-
-        const data = await response.json();
-        customers = data; // Cập nhật mảng khách hàng từ server
-        updateTable(); // Cập nhật bảng hiển thị
+      const response = await fetch("http://localhost:4000/customer/list"); // Đúng route theo router.get("/list", ...)
+      if (!response.ok) {
+        throw new Error("Không thể lấy danh sách khách hàng từ server.");
+      }
+  
+      const data = await response.json();
+      customers = data; // Giả sử BE trả về mảng khách hàng
+      updateTable();    // Hàm cập nhật lại UI
     } catch (error) {
-        console.error("Lỗi khi lấy danh sách khách hàng:", error);
-        alert("Đã xảy ra lỗi khi lấy danh sách khách hàng. Vui lòng thử lại.");
+      alert("Đã xảy ra lỗi khi lấy danh sách khách hàng. Vui lòng thử lại.");
     }
-}
+  }  
 
 // Gọi hàm fetchCustomersFromServer khi trang được tải
 document.addEventListener("DOMContentLoaded", fetchCustomersFromServer);
@@ -50,52 +25,40 @@ function addCustomer() {
     // Lấy thông tin từ các input
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    const phoneNumber = document.getElementById('phone').value;
     // const status = document.getElementById('status').value;
 
     // Kiểm tra nếu tất cả các trường không trống
-    if (name && email && phone) {
+    if (name && email && phoneNumber) {
         // Gói dữ liệu vào customerData
         const customerData = {
             name,
             email,
-            phone
+            phoneNumber
         };
 
         // Gửi yêu cầu tạo khách hàng tới server
-        fetch('http://localhost:4000/create', {
+        fetch('http://localhost:4000/customer/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(customerData)
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Customer created:', data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-
-        // Tạo đối tượng khách hàng để hiển thị trong bảng
-        const customer = {
-            name,
-            email,
-            phone,
-            // status
-        };
-
-        // Thêm khách hàng vào mảng
-        customers.push(customer);
-
-        // Gọi hàm cập nhật bảng
-        updateTable();
-
-        // Xóa giá trị các input sau khi thêm
-        document.getElementById('name').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('phone').value = '';
+        })
+            .then(async response => {
+                const data = await response.json();
+                alert(data.message);
+                if (response.status === 201) {
+                    customers.push(customerData);
+                    updateTable();
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('phone').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     } else {
         alert('Vui lòng điền đầy đủ thông tin!');
     }
@@ -104,7 +67,8 @@ function addCustomer() {
 // Hàm cập nhật bảng với dữ liệu mới
 function updateTable() {
     const tableBody = document.getElementById('customer-table');
-    tableBody.innerHTML = '';
+    //   ======= LỖI =========
+    tableBody.innerHTML = '';    
 
     // Duyệt qua mảng khách hàng để tạo các dòng trong bảng
     customers.forEach((customer, index) => {
@@ -115,8 +79,7 @@ function updateTable() {
             <td>${index + 1}</td>
             <td>${customer.name}</td>
             <td>${customer.email}</td>
-            <td>${customer.phone}</td>
-            <td>${customer.status}</td>
+            <td>${customer.phoneNumber}</td>
             <td>
                 <button class="btn btn-warning" onclick="editCustomer(${index})">Sửa</button>
                 <button class="btn btn-danger" onclick="deleteCustomer(${index})">Xóa</button>

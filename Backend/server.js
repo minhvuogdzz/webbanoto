@@ -37,9 +37,9 @@ app.use(express.static(path.join(__dirname, "../Frontend/javascript")));
 app.use(express.static(path.join(__dirname, "../Frontend/stylecss"))); 
 app.use(express.static(path.join(__dirname, "../Frontend/image")));
 app.use("/auth", authRoute);
-app.use("/api", userRoute);
+app.use("/user", userRoute);
 app.use("/api", carRoute);
-app.use("/api", cusRoute);
+app.use("/customer", cusRoute);
 app.listen(PORT, () => {
     console.log(`*Server is running at: http://localhost:${PORT}`);
 });
