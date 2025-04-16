@@ -5,10 +5,6 @@
         <input type="text" id="name" class="form-control w-25" placeholder="Tên khách hàng">
         <input type="email" id="email" class="form-control w-25" placeholder="Email">
         <input type="text" id="phone" class="form-control w-25" placeholder="Số điện thoại">
-        <select id="status" class="form-control w-25">
-            <option value="Hoạt động">Hoạt động</option>
-            <option value="Ngừng hoạt động">Ngừng hoạt động</option>
-        </select>
         <button class="btn btn-primary ms-auto" onclick="addCustomer()">Thêm khách hàng</button>
     </div>
 
@@ -19,7 +15,6 @@
                 <th>Tên</th>
                 <th>Email</th>
                 <th>Số điện thoại</th>
-                <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -28,3 +23,8 @@
         </tbody>
     </table>
 </div>
+
+<!-- Ensure the script is loaded at the end of the body -->
+<script src="./javascript/customerMana.js"></script>
+</body>
+</html>
