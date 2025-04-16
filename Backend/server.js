@@ -32,14 +32,14 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, "../Frontend"))); 
+app.use(express.static(path.join(__dirname, "../Frontend"))); // Serve all static files from the Frontend directory
 app.use(express.static(path.join(__dirname, "../Frontend/javascript"))); 
 app.use(express.static(path.join(__dirname, "../Frontend/stylecss"))); 
 app.use(express.static(path.join(__dirname, "../Frontend/image")));
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/api", carRoute);
-app.use("/customer", cusRoute);
+app.use("/customer", cusRoute); // Ensure the customer route is registered
 app.listen(PORT, () => {
     console.log(`*Server is running at: http://localhost:${PORT}`);
 });

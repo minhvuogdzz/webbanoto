@@ -28,6 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100); // Kiểm tra mỗi 100ms
 });
 
+// // Re-fetch customer 
+// document.addEventListener("visibilitychange", () => {
+//     if (document.visibilityState === "visible") {
+//         fetchCustomersFromServer();
+//     }
+// });
 
 // Hàm thêm khách hàng vào bảng
 function addCustomer() {
@@ -76,18 +82,16 @@ function addCustomer() {
 // Hàm cập nhật bảng với dữ liệu mới
 function updateTable() {
     const tableBody = document.getElementById('customer-table');
-    //   ======= LỖI =========
-    try {
-        tableBody.innerHTML = '';
-    } catch (error) {
-        alert(error)
+    if (!tableBody) {
+        console.error("Element with ID 'customer-table' not found in the DOM.");
+        return;
     }
 
-    // Duyệt qua mảng khách hàng để tạo các dòng trong bảng
+    tableBody.innerHTML = ''; // Clear the table before updating
+
+    // Populate the table with customer data
     customers.forEach((customer, index) => {
         const row = document.createElement('tr');
-
-        // Tạo các ô trong bảng
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>${customer.name}</td>
@@ -98,8 +102,6 @@ function updateTable() {
                 <button class="btn btn-danger" onclick="deleteCustomer(${index})">Xóa</button>
             </td>
         `;
-
-        // Thêm dòng vào bảng
         tableBody.appendChild(row);
     });
 }

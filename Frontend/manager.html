@@ -6,7 +6,6 @@
     <script src="/javascript/manager.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/javascript/dashboard.js"></script>
-    <script src="/javascript/customerMana.js"></script>
     <title>Management</title>
     <link rel="stylesheet" href="/stylecss/manager.css">
     <link rel="icon" href="/image/LogoWeb.png">
@@ -29,9 +28,8 @@
             <div class="list-menu">
                 <h1 class="menu-title" >MENU</h1>
                 <button class="btn-menu" onclick="loadPage('dashboard.html')">Dashboard</button>
-                <button class="btn-menu" onclick="loadPage('customersManager.html')">Customers Manager</button>
+                <button class="btn-menu" onclick="loadPage('customersManager.html'); updateTable()">Customers Manager</button>
                 <button class="btn-menu" onclick="loadPage('carsManager.html')">Cars Manager</button>
-                <button class="btn-menu" onclick="loadPage('review.html')">Review & Comments</button>
                 <button class="btn-menu" onclick="window.location.href='index.html'">Return Home</button>
             </div>
         </div>
@@ -41,9 +39,36 @@
     
         </div>
     </div>
+    <script src="/javascript/customerMana.js"></script>
     <script>
         //dashboard by default
         loadPage('dashboard.html');
-    </script>
+
+//         function updateTable() {
+//         const tableBody = document.getElementById('customer-table');
+//         if (!tableBody) {
+//         console.error("Element with ID 'customer-table' not found in the DOM.");
+//         return;
+//     }
+
+//         tableBody.innerHTML = ''; // Clear the table before updating
+
+//         // Populate the table with customer data
+//         customers.forEach((customer, index) => {
+//         const row = document.createElement('tr');
+//         row.innerHTML = `
+//             <td>${index + 1}</td>
+//             <td>${customer.name}</td>
+//             <td>${customer.email}</td>
+//             <td>${customer.phoneNumber}</td>
+//             <td>
+//                 <button class="btn btn-warning" onclick="editCustomer(${index})">Sửa</button>
+//                 <button class="btn btn-danger" onclick="deleteCustomer(${index})">Xóa</button>
+//             </td>
+//         `;
+//         tableBody.appendChild(row);
+//     });
+// }
+ </script>
 </body>
 </html>
