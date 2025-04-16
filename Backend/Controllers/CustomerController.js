@@ -19,7 +19,7 @@ const createCustomer = async (req, res) => {
 
     const newCustomer = new Customer({ name, email, phoneNumber });
     await newCustomer.save();
-    return res.status(201).json(newCustomer);
+    return res.status(201).json({ message: "Thêm thành công!" });
   } catch (error) {
     console.error("❌ Lỗi khi tạo khách hàng:", error);
 

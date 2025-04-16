@@ -4,19 +4,18 @@ let customers = [];
 // Hàm lấy danh sách khách hàng từ backend
 async function fetchCustomersFromServer() {
     try {
-        const response = await fetch("/"); // Ensure this matches the route in CustomerRoute.js
-        if (!response.ok) {
-            throw new Error("Không thể lấy danh sách khách hàng từ server.");
-        }
-
-        const data = await response.json();
-        customers = data; // Cập nhật mảng khách hàng từ server
-        updateTable(); // Cập nhật bảng hiển thị
+      const response = await fetch("http://localhost:4000/customer/list"); // Đúng route theo router.get("/list", ...)
+      if (!response.ok) {
+        throw new Error("Không thể lấy danh sách khách hàng từ server.");
+      }
+  
+      const data = await response.json();
+      customers = data; // Giả sử BE trả về mảng khách hàng
+      updateTable();    // Hàm cập nhật lại UI
     } catch (error) {
-        console.error("Lỗi khi lấy danh sách khách hàng:", error);
-        alert("Đã xảy ra lỗi khi lấy danh sách khách hàng. Vui lòng thử lại.");
+      alert("Đã xảy ra lỗi khi lấy danh sách khách hàng. Vui lòng thử lại.");
     }
-}
+  }  
 
 // Gọi hàm fetchCustomersFromServer khi trang được tải
 document.addEventListener("DOMContentLoaded", fetchCustomersFromServer);
@@ -42,28 +41,24 @@ function addCustomer() {
         fetch('http://localhost:4000/customer/create', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(customerData)
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Customer created:', data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-
-        // Thêm khách hàng vào mảng
-        customers.push(customerData);
-
-        // Gọi hàm cập nhật bảng
-        updateTable();
-
-        // Xóa giá trị các input sau khi thêm
-        document.getElementById('name').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('phone').value = '';
+        })
+            .then(async response => {
+                const data = await response.json();
+                alert(data.message);
+                if (response.status === 201) {
+                    customers.push(customerData);
+                    updateTable();
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('phone').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     } else {
         alert('Vui lòng điền đầy đủ thông tin!');
     }
@@ -72,7 +67,8 @@ function addCustomer() {
 // Hàm cập nhật bảng với dữ liệu mới
 function updateTable() {
     const tableBody = document.getElementById('customer-table');
-    tableBody.innerHTML = '';
+    //   ======= LỖI =========
+    tableBody.innerHTML = '';    
 
     // Duyệt qua mảng khách hàng để tạo các dòng trong bảng
     customers.forEach((customer, index) => {
@@ -83,8 +79,7 @@ function updateTable() {
             <td>${index + 1}</td>
             <td>${customer.name}</td>
             <td>${customer.email}</td>
-            <td>${customer.phone}</td>
-            <td>${customer.status}</td>
+            <td>${customer.phoneNumber}</td>
             <td>
                 <button class="btn btn-warning" onclick="editCustomer(${index})">Sửa</button>
                 <button class="btn btn-danger" onclick="deleteCustomer(${index})">Xóa</button>
