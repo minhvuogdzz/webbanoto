@@ -4,30 +4,30 @@ let customers = [];
 // Hàm lấy danh sách khách hàng từ backend
 async function fetchCustomersFromServer() {
     try {
-      const response = await fetch("http://localhost:4000/customer/list"); // Đúng route theo router.get("/list", ...)
-      if (!response.ok) {
-        throw new Error("Không thể lấy danh sách khách hàng từ server.");
-      }
-  
-      const data = await response.json();
-      customers = data; // Giả sử BE trả về mảng khách hàng
-      updateTable();    // Hàm cập nhật lại UI
+        const response = await fetch("http://localhost:4000/customer/list"); // Đúng route theo router.get("/list", ...)
+        if (!response.ok) {
+            throw new Error("Không thể lấy danh sách khách hàng từ server.");
+        }
+
+        const data = await response.json();
+        customers = data; // Giả sử BE trả về mảng khách hàng
+        updateTable();    // Hàm cập nhật lại UI
     } catch (error) {
-      alert("Đã xảy ra lỗi khi lấy danh sách khách hàng. Vui lòng thử lại.");
+        alert("Đã xảy ra lỗi khi lấy danh sách khách hàng. Vui lòng thử lại.");
     }
-  }  
+}
 
 // Gọi hàm fetchCustomersFromServer khi trang được tải
 document.addEventListener("DOMContentLoaded", () => {
     const interval = setInterval(() => {
-      const tableBody = document.getElementById("customer-table");
-      if (tableBody) {
-        clearInterval(interval); // Đã tìm thấy, dừng loop
-        fetchCustomersFromServer(); // Gọi hàm ở đây
-      }
+        const tableBody = document.getElementById("customer-table");
+        if (tableBody) {
+            clearInterval(interval); // Đã tìm thấy, dừng loop
+            fetchCustomersFromServer(); // Gọi hàm ở đây
+        }
     }, 100); // Kiểm tra mỗi 100ms
-  });
-  
+});
+
 
 // Hàm thêm khách hàng vào bảng
 function addCustomer() {
@@ -78,7 +78,7 @@ function updateTable() {
     const tableBody = document.getElementById('customer-table');
     //   ======= LỖI =========
     try {
-        tableBody.innerHTML = '';    
+        tableBody.innerHTML = '';
     } catch (error) {
         alert(error)
     }
@@ -144,12 +144,24 @@ function updateCustomer(index) {
 }
 
 // Hàm xóa khách hàng
-function deleteCustomer(index) {
-    // Xác nhận xóa
+async function deleteCustomer(index) {
     if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) {
-        customers.splice(index, 1);
-        updateTable();
+        try {
+            const customerId = customers[index]._id; // Lấy ID thực tế
+            const response = await fetch(`http://localhost:4000/customer/${customerId}`, {
+                method: "DELETE"
+            });
+
+            if (!response.ok) {
+                throw new Error("Xoá khách hàng thất bại");
+            }
+
+            alert("Xoá thành công!");
+            // Cập nhật lại danh sách khách hàng
+            customers.splice(index, 1);
+            updateTable();
+        } catch (error) {
+            alert("Đã xảy ra lỗi khi xoá khách hàng.");
+        }
     }
 }
-
-console.log(customers);

@@ -13,7 +13,7 @@ const createCustomer = async (req, res) => {
       const phoneExist = await Customer.findOne({ phoneNumber });
 
       if (emailExist || phoneExist) {
-        return res.status(400).json({ message: "Khách hàng đã tồn tại!" });
+        return res.status(400).json({ message: "Email hoặc số điện thoại đã tồn tại!" });
       }
     }
 
