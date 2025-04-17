@@ -265,6 +265,12 @@ body{
   border: 1px solid;
   border-color: transparent;
   color: #bab6b6;
+  cursor: pointer;
+}
+
+.sign-in .button:hover {
+  /* background-color: #605d5d; */
+  color: #2e809d;
 }
 
 .sign-in .button-3 {
