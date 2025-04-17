@@ -61,7 +61,6 @@ async function updateNavbar() {
 
             const data = await response.json();
             console.log("Thông tin user từ API profile:", data);
-
             if (response.ok && data.role === "admin") {
                 adminManagerLink.style.display = "block"; 
             } else {
@@ -80,12 +79,14 @@ async function updateNavbar() {
 }
 
 function logoutUser() {
+    currentEmail = null;
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("name");
     localStorage.removeItem("avatar");
     alert("Bạn đã đăng xuất!");
     updateNavbar(); 
+    
 }
 
 // Gọi updateNavbar() ngay khi trang load
@@ -214,4 +215,4 @@ async function loadCars(cars) {
         document.getElementById('car-list').innerHTML = '<p>Không thể tải danh sách xe. Vui lòng thử lại sau.</p>';
     }
 }
-
+module.exports = email;

@@ -112,7 +112,6 @@ function handleCredentialResponse(response) {
 async function fetchProfile() {
     let token = localStorage.getItem("token");
     console.log("Token được lấy từ localStorage:", token);
-
     if (!token) {
         console.error("Không tìm thấy token trong localStorage!");
         alert("Bạn cần đăng nhập trước khi lấy thông tin profile!");

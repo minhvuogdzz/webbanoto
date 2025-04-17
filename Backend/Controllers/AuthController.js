@@ -50,7 +50,7 @@ const login = async (req, res) => {
         } else {
             return res.status(400).json({ message: "Vui lòng nhập email hoặc username!" });
         }
-
+        
         if (!user) {
             console.error("Không tìm thấy user!"); // Debug user not found
             return res.status(400).json({ message: "Tài khoản hoặc mật khẩu không đúng!" });

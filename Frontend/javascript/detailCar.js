@@ -1,3 +1,5 @@
+
+
 function getUrlParameter(name) {
     name = name.replace(/[\[\]]/g, '\\$&');
     const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
@@ -26,6 +28,7 @@ async function loadCarDetails(carId) {
         document.getElementById('carType').textContent = car.Type;
         document.getElementById('carFuel').textContent = car.Fuel;
         document.getElementById('carPrice').textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND'}).format(car.Price);
+        document.getElementById('description').textContent = car.description;
     } catch (error) {
         console.error('Error loading car details:', error);
         // Xử lý lỗi phù hợp (ví dụ: hiển thị thông báo cho người dùng)
@@ -162,7 +165,70 @@ function validateForm() {
         submitButton.style.opacity = '0.5'; // Làm mờ nút
     }
 }
-
+document.getElementById('submitButton').addEventListener('click', function() {
+    const name = document.getElementById('fullname').value;
+    const email = localStorage.getItem("email");
+    const phoneNumber = document.getElementById('phone').value;
+    const city = document.getElementById('city').value;
+    const dealer = document.getElementById('dealer').value;
+    const date = document.getElementById('date').value;
+    const customerData = {
+        name,
+        email,
+        phoneNumber
+    };
+    // Gửi request tạo customer
+    fetch('http://localhost:4000/customer/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customerData)
+    }).then(async response => {
+            if(response.status === 400)
+            {
+            }else{
+                const orderData = {
+                    phoneNumber,
+                    city,
+                    dealer,
+                    date,
+                    carId
+                };
+                fetch('http://localhost:4000/order/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                })
+                .then(async response => {
+                    if(response.status === 201)
+                    {
+                        console.log("AAAAAAA");
+                    }
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Tạo đơn hàng thất bại');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Đơn hàng đã được tạo:', data);
+                    // Redirect hoặc làm gì đó sau khi thành công
+                })
+                .catch(error => {
+                    console.error('Lỗi:', error);
+                    alert('Lỗi khi đặt xe: ' + error.message);
+                });  
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    
+    
+});
 // Gắn sự kiện 'input' hoặc 'change' cho các trường trong form
 document.getElementById('fullname').addEventListener('input', validateForm);
 document.getElementById('phone').addEventListener('input', validateForm);

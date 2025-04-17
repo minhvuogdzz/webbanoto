@@ -41,6 +41,7 @@ app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/api", carRoute);
 app.use("/customer", cusRoute);
+app.use("/order", orderRoute);
 // app.use("/order", orderRoute);
 app.listen(PORT, () => {
     console.log(`*Server is running at: http://localhost:${PORT}`);

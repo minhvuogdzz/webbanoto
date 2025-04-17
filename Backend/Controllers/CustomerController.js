@@ -11,7 +11,10 @@ const createCustomer = async (req, res) => {
     if (customerCount > 0) {
       const emailExist = await Customer.findOne({ email });
       const phoneExist = await Customer.findOne({ phoneNumber });
-
+      if(emailExist && phoneExist)
+      {
+        return res.status(202).json({ message: "Cho phép thêm order với customer này" });
+      }
       if (emailExist || phoneExist) {
         return res.status(400).json({ message: "Email hoặc số điện thoại đã tồn tại!" });
       }
