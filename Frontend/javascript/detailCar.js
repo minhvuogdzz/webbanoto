@@ -1,5 +1,3 @@
-
-
 function getUrlParameter(name) {
     name = name.replace(/[\[\]]/g, '\\$&');
     const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
@@ -139,6 +137,7 @@ checkbox.addEventListener('change', () => {
     const allChecked = Array.from(checkboxes).every(cb => cb.checked); // Kiểm tra nếu tất cả checkbox được chọn
     if (allChecked) {
         submitButton.classList.add('enabled'); // Kích hoạt nút
+        submitButton.style.opacity = '1'; // Xóa hiệu ứng làm mờ
     } else {
         submitButton.classList.remove('enabled'); // Vô hiệu hóa nút
     }
@@ -158,7 +157,7 @@ function validateForm() {
     if (fullname && phone && city && dealer && date) {
         submitButton.classList.add('enabled'); // Kích hoạt nút
         submitButton.style.pointerEvents = 'auto'; // Cho phép nhấn
-        submitButton.style.opacity = '1'; // Xóa hiệu ứng làm mờ
+        // submitButton.style.opacity = '1'; // Xóa hiệu ứng làm mờ
     } else {
         submitButton.classList.remove('enabled'); // Vô hiệu hóa nút
         submitButton.style.pointerEvents = 'none'; // Không cho phép nhấn
