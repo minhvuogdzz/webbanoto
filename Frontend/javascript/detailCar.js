@@ -178,7 +178,7 @@ document.getElementById('submitButton').addEventListener('click', function() {
         phoneNumber
     };
     // Gửi request tạo customer
-    fetch('http://localhost:4000/customer/create', {
+    fetch('http://localhost:4000/customer/create',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -188,6 +188,16 @@ document.getElementById('submitButton').addEventListener('click', function() {
             if(response.status === 400)
             {
             }else{
+                if(!isValidPhoneNumber(phoneNumber))
+                {
+                    alert("Số điện thoại không hợp lệ!");
+                    return;
+                }
+                if(!isValidFullName(name))
+                {
+                    alert("Tên không hợp lệ!");
+                    return;
+                }
                 const orderData = {
                     phoneNumber,
                     city,
@@ -205,7 +215,6 @@ document.getElementById('submitButton').addEventListener('click', function() {
                 .then(async response => {
                     if(response.status === 201)
                     {
-                        console.log("AAAAAAA");
                     }
                     if (!response.ok) {
                         const errorData = await response.json();
@@ -214,7 +223,7 @@ document.getElementById('submitButton').addEventListener('click', function() {
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Đơn hàng đã được tạo:', data);
+                    alert("Đặt xe thành công!");
                     // Redirect hoặc làm gì đó sau khi thành công
                 })
                 .catch(error => {
@@ -229,6 +238,22 @@ document.getElementById('submitButton').addEventListener('click', function() {
     
     
 });
+function isValidFullName(name) {
+    const regex = /^[a-zA-ZÀ-ỹ\s'-]{6,50}$/;
+    
+    if (!regex.test(name)) return false;
+    
+    // Kiểm tra có ít nhất 2 từ
+    const words = name.trim().split(/\s+/);
+    return words.length >= 2;
+  }
+function isValidPhoneNumber(phone) {
+    // Biểu thức chính quy kiểm tra số điện thoại Việt Nam
+    // Bắt đầu bằng 0, theo sau là 9, 8, 7, 5, 3, và có 9 hoặc 10 chữ số
+    const regex = /^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/;
+    
+    return regex.test(phone);
+  }
 // Gắn sự kiện 'input' hoặc 'change' cho các trường trong form
 document.getElementById('fullname').addEventListener('input', validateForm);
 document.getElementById('phone').addEventListener('input', validateForm);
