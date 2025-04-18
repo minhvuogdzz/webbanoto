@@ -132,7 +132,7 @@
         const loginBtn = document.getElementById("login-btn");
 
         if (token) {
-            loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <p>${name || email}</p>`;
+            loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar" style="filter: brightness(0) invert(1);"> <p>${name || email}</p>`;
             loginBtn.href = "#";
         } else {
             loginBtn.innerHTML = `<i class="fa fa-user"></i> <span id="login-text">Login</span>`;
